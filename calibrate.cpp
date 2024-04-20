@@ -12,7 +12,7 @@ int main() {
 
     // Board creation
     cv::aruco::Dictionary dictionary = cv::aruco::getPredefinedDictionary(cv::aruco::DICT_6X6_250);
-    cv::aruco::CharucoBoard board = cv::aruco::CharucoBoard(cv::Size(5, 7), 0.04f, 0.02f, dictionary);
+    cv::aruco::CharucoBoard board = cv::aruco::CharucoBoard(cv::Size(5, 7), 0.0285f, 0.014f, dictionary);
     cv::aruco::CharucoDetector detector = cv::aruco::CharucoDetector(board);
 
     cv::VideoCapture *videoCapture; // capture for webcam

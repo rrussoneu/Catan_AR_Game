@@ -8,10 +8,12 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
 
 add_executable(Catan_AR_Game
-        main.cpp
         draw_shapes.cpp
         draw_shapes.h
         util.cpp
-        util.h)
+        util.h
+        ObjDrawer.cpp
+        ObjDrawer.h
+        main.cpp)
 
 target_link_libraries(Catan_AR_Game ${OpenCV_LIBS})
