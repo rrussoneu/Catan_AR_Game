@@ -3,6 +3,7 @@
 #include "util.h"
 #include <opencv2/opencv.hpp>
 #include "draw_shapes.h"
+#include "organize_markers.h"
 
 int main() {
 
@@ -84,8 +85,26 @@ int main() {
     cv::aruco::ArucoDetector detector(dictionary, detector_params);
 
 
-    cv::Mat brick_hex_mat = cv::imread("res/hexes/desert_hex.png");
-    std::vector<cv::Point2f> brick_hex_pts;
+    cv::Mat desert_hex_mat = cv::imread("res/hexes/desert_hex.png");
+    cv::Mat wheat_hex_mat = cv::imread("res/hexes/wheat_hex.png");
+    cv::Mat ore_hex_mat = cv::imread("res/hexes/ore_hex.png");
+    cv::Mat wood_hex_mat = cv::imread("res/hexes/wood_hex.png");
+    cv::Mat sheep_hex_mat = cv::imread("res/hexes/sheep_hex.png");
+    cv::Mat brick_hex_mat = cv::imread("res/hexes/brick_hex.png");
+
+
+    std::vector<cv::Mat> mats;
+    mats.push_back(desert_hex_mat);
+    mats.push_back(wheat_hex_mat);
+    mats.push_back(ore_hex_mat);
+    mats.push_back(wood_hex_mat);
+    mats.push_back(sheep_hex_mat);
+    mats.push_back(brick_hex_mat);
+
+
+    std::vector<std::vector<cv::Point2f>> homography_points = get_homography_points(mats);
+    std::vector<cv::Point2f> brick_hex_pts = homography_points.at(5);
+
     /*
     Row: 5Col: 175
     Row: 100 Col: 5
@@ -138,17 +157,62 @@ int main() {
         cv::Mat curr_ids;
         std::vector<cv::Point3f> curr_obj_points;
         std::vector<cv::Point2f> curr_img_points;
-        std::vector<int> brick_ids;
+
+        //std::vector<int> brick_ids;
         //brick_ids.push_back(43);
-        brick_ids.push_back(44);
-        brick_ids.push_back(45);
-        brick_ids.push_back(46);
-        brick_ids.push_back(47);
+        //brick_ids.push_back(44);
+        //brick_ids.push_back(45);
+        //brick_ids.push_back(46);
+        //brick_ids.push_back(47);
         //brick_ids.push_back(48);
         //brick_ids.push_back(49);
+
+        std::unordered_map<std::string, std::unordered_map<int, std::vector < cv::Point2f>>> marker_maps = make_maps();
+
+        /*
+        // maps for the resource tiles
+        std::unordered_map<int, std::vector<cv::Point2f>> desert_map;
+        std::unordered_map<int, std::vector<cv::Point2f>> wheat_map_1;
+        std::unordered_map<int, std::vector<cv::Point2f>> wheat_map_2;
+        std::unordered_map<int, std::vector<cv::Point2f>> ore_map;
+        std::unordered_map<int, std::vector<cv::Point2f>> wood_map;
+        std::unordered_map<int, std::vector<cv::Point2f>> sheep_mat;
         std::unordered_map<int, std::vector<cv::Point2f>> brick_map;
+        marker_maps["desert_map"] = desert_map;
+        marker_maps["wheat_map_1"] = wheat_map_1;
+        marker_maps["wheat_map_2"] = wheat_map_2;
+        marker_maps["ore_map"] = ore_map;
+        marker_maps["wood_map"] = wood_map;
+        marker_maps["sheep_mat"] = sheep_mat;
+        marker_maps["brick_map"] = brick_map;
 
+        // resource card maps
+        std::unordered_map<int, std::vector<cv::Point2f>> wheat_map_1_res;
+        std::unordered_map<int, std::vector<cv::Point2f>> wheat_map_2_res;
+        std::unordered_map<int, std::vector<cv::Point2f>> ore_map_res;
+        std::unordered_map<int, std::vector<cv::Point2f>> wood_map_res;
+        std::unordered_map<int, std::vector<cv::Point2f>> sheep_mat_res;
+        std::unordered_map<int, std::vector<cv::Point2f>> brick_map_res;
 
+        marker_maps["wheat_map_1_res"] = wheat_map_1_res;
+        marker_maps["wheat_map_2_res"] = wheat_map_2_res;
+        marker_maps["ore_map_res"] = ore_map_res;
+        marker_maps["wood_map_res"] = wood_map_res;
+        marker_maps["sheep_mat_res"] = sheep_mat_res;
+        marker_maps["brick_map_res"] = brick_map_res;
+
+        // dev card maps
+        std::unordered_map<int, std::vector<cv::Point2f>> knight_map;
+        std::unordered_map<int, std::vector<cv::Point2f>> vp_map;
+        std::unordered_map<int, std::vector<cv::Point2f>> monopoly_map;
+        std::unordered_map<int, std::vector<cv::Point2f>> road_building_map;
+        std::unordered_map<int, std::vector<cv::Point2f>> yop_map;
+        marker_maps["knight_map"] = knight_map;
+        marker_maps["vp_map"] = vp_map;
+        marker_maps["monopoly_map"] = monopoly_map;
+        marker_maps["road_building_map"] = road_building_map;
+        marker_maps["yop_map"] = yop_map;
+        */
         detector.detectMarkers(frame, marker_corners, marker_ids, rejected_candidates);
 
 
@@ -156,11 +220,12 @@ int main() {
         // visualize for testing
         if (!marker_ids.empty() && !marker_corners.empty()) {
             cv::aruco::drawDetectedMarkers(out, marker_corners, marker_ids);
-            std::vector<int> brick_check;
+            //std::vector<int> brick_check;
+
             for (int i = 0; i < marker_ids.size(); i++) {
                 if (marker_ids.at(i) >= 43 && marker_ids.at(i) < 49) {
-                    brick_check.push_back(marker_ids.at(i));
-                    brick_map[marker_ids.at(i)] = marker_corners.at(i);
+                    //brick_check.push_back(marker_ids.at(i));
+                    marker_maps["brick_map"][marker_ids.at(i)] = marker_corners.at(i);
                 }
             }
 
@@ -181,8 +246,89 @@ int main() {
 
 
             }
+
+            // do homography first and draw on top of the resulting frame for the shapes
+            for (int i = 1; i < 32; i++) { // can skip through a bunch of markers and iterate by 5
+                if (i % 5 != 5 && i != 1) { // skip if not 1, 6, etc
+                    continue;
+                } else {
+                    switch (i) {
+                        // hex homography
+                        // desert, wheat ore, wood, sheep, brick
+                        case 1:
+                            compute_homography(1, marker_maps["desert_map"], homography_points.at(0), wheat_hex_mat, frame, out);
+                        case 6:
+                            compute_homography(6, marker_maps["wheat_map_1"], homography_points.at(1), wheat_hex_mat, frame, out);
+                        case 11:
+                            compute_homography(11, marker_maps["wheat_map_2"], homography_points.at(1), wheat_hex_mat, frame, out);
+                        case 16:
+                            compute_homography(16, marker_maps["ore_map"], homography_points.at(2), ore_hex_mat, frame, out);
+                        case 21:
+                            compute_homography(21, marker_maps["sheep_mat"], homography_points.at(4), sheep_hex_mat, frame, out);
+                        case 26:
+                            compute_homography(26, marker_maps["wood_map"], homography_points.at(3), wood_hex_mat, frame, out);
+                        case 31:
+                            compute_homography(31, marker_maps["brick_map"], homography_points.at(5), brick_hex_mat, frame, out);
+                    }
+                }
+            }
+            for (int i = 36; i < 62; i++) { // same as above for resource cards
+                if (i % 5 != 5) { // 36, 41, etc. else skip iteration
+                    continue;
+                } else {
+                    switch (i) {
+                        // res card homography
+                        // FIX HOMOGRAPHY POINTS
+                        case 36:
+                            compute_homography(36, marker_maps["wheat_map_1_res"], homography_points.at(1), wheat_hex_mat, frame, out);
+                        case 41:
+                            compute_homography(41, marker_maps["wheat_map_2_res"], homography_points.at(1), wheat_hex_mat, frame, out);
+                        case 46:
+                            compute_homography(46, marker_maps["ore_map_res"], homography_points.at(2), ore_hex_mat, frame, out);
+                        case 51:
+                            compute_homography(51, marker_maps["sheep_mat_res"], homography_points.at(4), sheep_hex_mat, frame, out);
+                        case 56:
+                            compute_homography(56, marker_maps["wood_map_res"], homography_points.at(3), wood_hex_mat, frame, out);
+                        case 61:
+                            compute_homography(61, marker_maps["brick_map_res"], homography_points.at(5), brick_hex_mat, frame, out);
+                    }
+                }
+            }
+            for (int i = 66; i < 91; i++) { // same as above for resource cards
+                /*
+                marker_maps["knight_map"] = knight_map;
+                marker_maps["vp_map"] = vp_map;
+                marker_maps["monopoly_map"] = monopoly_map;
+                marker_maps["road_building_map"] = road_building_map;
+                marker_maps["yop_map"] = yop_map;
+                 */
+
+                if (i % 5 != 5) { // 36, 41, etc. else skip iteration
+                    continue;
+                } else {
+                    switch (i) {
+                        // res card homography
+                        case 36:
+                            compute_homography(36, marker_maps["knight_map"], homography_points.at(1), wheat_hex_mat, frame, out);
+                        case 41:
+                            compute_homography(41, marker_maps["wheat_map_2_res"], homography_points.at(1), wheat_hex_mat, frame, out);
+                        case 46:
+                            compute_homography(46, marker_maps["ore_map_res"], homography_points.at(2), ore_hex_mat, frame, out);
+                        case 51:
+                            compute_homography(51, marker_maps["sheep_mat_res"], homography_points.at(4), sheep_hex_mat, frame, out);
+                        case 56:
+                            compute_homography(56, marker_maps["wood_map_res"], homography_points.at(3), wood_hex_mat, frame, out);
+                        case 61:
+                            compute_homography(61, marker_maps["brick_map_res"], homography_points.at(5), brick_hex_mat, frame, out);
+                    }
+                }
+            }
+
+
             for (int j = 0; j < marker_ids.size(); j++) {
 
+
+                /*
                 if (marker_ids.at(j) == 44) {
                     if (brick_check.size() == 6) {
                         std::vector<cv::Point2f> frame_corners; // 0, 3, 23, 20, corners of points on board to make a box for image
@@ -208,8 +354,10 @@ int main() {
                         warped.copyTo(out, mask);
                     }
                 }
+                 */
 
             }
+
             for (int j = 0; j < marker_ids.size(); j++) {
                 if (marker_ids.at(j) == 49) {
                     std::vector<cv::Point2f> img_points; // 2D calculated points to draw
@@ -217,6 +365,7 @@ int main() {
                     draw_knight(out, img_points);
                 }
             }
+
         }
 
         // various key presses below

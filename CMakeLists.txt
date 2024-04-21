@@ -14,6 +14,8 @@ add_executable(Catan_AR_Game
         util.h
         ObjDrawer.cpp
         ObjDrawer.h
-        main.cpp)
+        generate_markers.cpp
+        organize_markers.cpp
+        organize_markers.h)
 
 target_link_libraries(Catan_AR_Game ${OpenCV_LIBS})

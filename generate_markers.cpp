@@ -10,7 +10,7 @@ int main() {
      * you need approx 855 markers which fits within the aruco dict
      * */
 
-    int hex = 7 * 7; // 7 per hexagon, 7 sample hexagons
+    int hex = 7 * 5; // 5 per hexagon given issues with 6 point homography, 7 sample hexagons
     int rob = 1; // one for the robber piece
     int pieces = 4 * 3; // 4 colors and 1 sample road, 1 sample settlement, one city per color
     int res = 6 * 5; // 6 sample resource cards, 5 resource card
@@ -39,94 +39,94 @@ int main() {
         if (i == 0) {
             path = "pieces/robber_";
         }
-        else if (i >= 1 and i < 8) {
+        else if (i >= 1 and i < 6) {
             path = "hex/desert_";
         }
-        else if (i >= 8 and i < 15) {
+        else if (i >= 6 and i < 11) {
             path = "hex/wheat_1_";
         }
-        else if (i >= 15 and i < 22) {
+        else if (i >= 11 and i < 16) {
             path = "hex/wheat_2_";
         }
-        else if (i >= 22 and i < 29) {
+        else if (i >= 16 and i < 21) {
             path = "hex/ore_";
         }
-        else if (i >= 29 and i < 36) {
+        else if (i >= 21 and i < 26) {
             path = "hex/sheep_";
         }
-        else if (i >= 36 and i < 43) {
+        else if (i >= 26 and i < 31) {
             path = "hex/wood_";
         }
-        else if (i >= 43 and i < 50) {
+        else if (i >= 31 and i < 36) {
             path = "hex/brick_";
         }
-        else if (i >= 50 and i < 55) {
+        else if (i >= 36 and i < 41) {
             path = "resource/wheat_1_";
         }
-        else if (i >= 55 and i < 60) {
+        else if (i >= 41 and i < 46) {
             path = "resource/wheat_2_";
         }
-        else if (i >= 60 and i < 65) {
+        else if (i >= 46 and i < 51) {
             path = "resource/ore_";
         }
-        else if (i >= 65 and i < 70) {
+        else if (i >= 51 and i < 56) {
             path = "resource/sheep_";
         }
-        else if (i >= 70 and i < 75) {
+        else if (i >= 56 and i < 61) {
             path = "resource/wood_";
         }
-        else if (i >= 75 and i < 80) {
+        else if (i >= 61 and i < 66) {
             path = "resource/brick_";
         }
-        else if (i >= 80 and i < 85) {
+        else if (i >= 66 and i < 71) {
             path = "dev/knight_";
         }
-        else if (i >= 85 and i < 90) {
+        else if (i >= 71 and i < 76) {
             path = "dev/victory_point_";
         }
-        else if (i >= 90 and i < 95) {
+        else if (i >= 76 and i < 81) {
             path = "dev/road_building_";
         }
-        else if (i >= 95 and i < 100) {
+        else if (i >= 81 and i < 86) {
             path = "dev/monopoly_";
         }
-        else if (i >= 100 and i < 105) {
+        else if (i >= 86 and i < 91) {
             path = "dev/year_of_plenty_";
         }
-        else if (i == 105) {
+        else if (i == 91) {
             path = "pieces/red/road_";
         }
-        else if (i == 106) {
+        else if (i == 92) {
             path = "pieces/red/settlement_";
         }
-        else if (i == 107) {
+        else if (i == 93) {
             path = "pieces/red/city_";
         }
-        else if (i == 108) {
+        else if (i == 94) {
             path = "pieces/blue/road_";
         }
-        else if (i == 109) {
+        else if (i == 95) {
             path = "pieces/blue/settlement_";
         }
-        else if (i == 110) {
+        else if (i == 96) {
             path = "pieces/blue/city_";
         }
-        else if (i == 111) {
+        else if (i == 97) {
             path = "pieces/green/road_";
         }
-        else if (i == 112) {
+        else if (i == 98) {
             path = "pieces/green/settlement_";
         }
-        else if (i == 113) {
+        else if (i == 99) {
             path = "pieces/green/city_";
         }
-        else if (i == 114) {
+        else if (i == 100) {
             path = "pieces/brown/road_";
         }
-        else if (i == 115) {
+        else if (i == 101) {
             path = "pieces/brown/settlement_";
         }
-        else if (i ==116) {
+        else if (i ==102) {
             path = "pieces/brown/city_";
         }
         std::string full_path = "res/markers/" + path + std::to_string(i) + ".png";
