@@ -24,6 +24,16 @@ int print_turn(std::vector<int> scores, std::vector<int> roads, int dice_roll);
 int roll_dice();
 
 /**
+ * Handles different cases where homography is needed to display an image
+ * @param marker_maps map of aruco markers
+ * @param homography_points mat points for calculation
+ * @param mats mats to use
+ * @param frame camera frame as input
+ * @param out output frame to draw on
+ */
+void handle_homography(std::unordered_map<std::string, std::unordered_map<int, std::vector < cv::Point2f>>> marker_maps, std::vector<std::vector<cv::Point2f>> homography_points, std::vector<cv::Mat> mats, cv::Mat frame, cv::Mat out);
+
+/**
  * Gets points for homography calculation for a vector of cv mats
  * @param mats the mats
  * @return the newly created vector

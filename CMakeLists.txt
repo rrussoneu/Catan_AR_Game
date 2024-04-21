@@ -14,7 +14,7 @@ add_executable(Catan_AR_Game
         util.h
         ObjDrawer.cpp
         ObjDrawer.h
-        generate_markers.cpp
+        main.cpp
         organize_markers.cpp
         organize_markers.h)
 
