@@ -19,7 +19,7 @@ std::unordered_map<std::string, std::unordered_map<int, std::vector < cv::Point2
  * @param marker_ids aruco marker ids
  * @param maps maps for the markers
  */
-void map_markers(std::vector<int> marker_ids, std::unordered_map<std::string, std::unordered_map<int, std::vector < cv::Point2f>>> maps);
+std::unordered_map<std::string, std::unordered_map<int, std::vector < cv::Point2f>>> map_markers(std::vector<int> marker_ids, std::vector<std::vector<cv::Point2f>> marker_corners, std::unordered_map<std::string, std::unordered_map<int, std::vector < cv::Point2f>>> maps);
 
 
 #endif //CATAN_AR_GAME_ORGANIZE_MARKERS_H

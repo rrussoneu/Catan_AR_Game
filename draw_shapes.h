@@ -7,6 +7,14 @@
 
 #include <opencv2/opencv.hpp>
 
+void solve_and_draw(std::vector<int> marker_ids, std::vector<cv::Vec3d> rvecs, std::vector<cv::Vec3d> tvecs, std::unordered_map<std::string, std::vector<cv::Point3f>> object_map, std::vector<double> distortion_coefficients, cv::Mat camera_matrix, cv::Mat output_frame);
+
+/**
+ * Generates a map of vectors of 3d points for drawing objects
+ * @return the map
+ */
+std::unordered_map<std::string, std::vector<cv::Point3f>> generate_3d_points();
+
 /**
  * Draws a brick from image points - just a rectangular box
  * @param frame frame to draw on

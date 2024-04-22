@@ -4,6 +4,91 @@
 
 #include "draw_shapes.h"
 
+std::unordered_map<std::string, std::vector<cv::Point3f>> generate_3d_points() {
+    std::unordered_map<std::string, std::vector<cv::Point3f>> object_map;
+    // The points for hexagon models
+    std::vector<cv::Point3f> wood_hex_points = {cv::Point3f(0.0,0.0,0.0), cv::Point3f(0.08,0.0,0.0),  cv::Point3f(0.08,0.08,0.0), cv::Point3f(0.0,0.08,0.0),// square base
+                                                cv::Point3f(0.0,0.0,0.1), cv::Point3f(0.08,0.0,0.1), cv::Point3f(0.08,0.08,0.1), cv::Point3f(0.0,0.08,0.1),  // top of tree trunk
+                                                cv::Point3f(-0.04, 0.0, 0.1), cv::Point3f(.12, 0.0, 0.1), cv::Point3f(.12, 0.08, 0.1), cv::Point3f(-0.04, 0.08, 0.1),  // leaves base
+                                                cv::Point3f(-0.04, 0.0, 0.13), cv::Point3f(.12, 0.0, 0.13),cv::Point3f(.12, 0.08, 0.13), cv::Point3f(-0.04, 0.08, 0.13),  // leaves level 2
+                                                cv::Point3f(-0.02, 0.0, 0.15), cv::Point3f(.1, 0.0, 0.15), cv::Point3f(.1, 0.08, 0.15), cv::Point3f(-0.02, 0.08, 0.15),  // leaves level 3
+                                                cv::Point3f(0.04, 0.0, 0.17), cv::Point3f(0.04, 0.08, 0.17) // top of leaves
+
+    };
+    object_map["wood_hex"] = wood_hex_points;
+
+    /*
+    std::vector<cv::Point3f> wheat_points = {cv::Point3f(0.06+ .02, 0.0,0.0), cv::Point3f(0.1 + .02, 0.0,0.00), cv::Point3f(0.1+ .02, 0.04, 0.00), cv::Point3f(0.08, 0.04, 0.00), // base
+                                             cv::Point3f(0.06+ .02, 0.0,-0.06), cv::Point3f(0.1+ .02, 0.0,-0.06), cv::Point3f(0.1+ .02, 0.04, -0.06), cv::Point3f(0.06+ .02, 0.04, -0.06), // middle
+                                             cv::Point3f(0.06+ .02, 0.0,-0.12), cv::Point3f(0.1+ .02, 0.0,-0.12), cv::Point3f(0.1+ .02, 0.04, -0.12), cv::Point3f(0.06+ .02, 0.04, -0.12), // top middle
+                                             cv::Point3f(0.06 - .06, 0.0,-0.12), cv::Point3f(0.1- .06, 0.0,-0.12), cv::Point3f(0.1- .06, 0.04, -0.12), cv::Point3f(0.06 - .06, 0.04, -0.12), // top left
+                                             cv::Point3f(0.06 + .06+ .02, 0.0,-0.12), cv::Point3f(0.1+ .06+ .02, 0.0,-0.12), cv::Point3f(0.1+ .06+ .02, 0.04, -0.12), cv::Point3f(0.06 + .06+ .02, 0.04, -0.12) // top right
+    };
+     */
+    object_map["wheat_hex"] = wheat_points;
+    object_map["wheat_res"] = wheat_points;
+
+    std::vector<cv::Point3f> sheep_points = {cv::Point3f(0.0,0.0,0.0), cv::Point3f(0.04,0.0,0.0), cv::Point3f(0.04,0.04,0.0), cv::Point3f(0.0,0.04,0.0), cv::Point3f(0.12,0.0,0.0), cv::Point3f(0.16,0.0,0.0), cv::Point3f(0.16,0.04,0.0), cv::Point3f(0.12,0.04,0.0), // sheep's anatomical bottom left
+                                             cv::Point3f(0.12,0.08,0.0), cv::Point3f(0.16,0.08,0.0), cv::Point3f(0.16,0.12,0.0), cv::Point3f(0.12,0.12,0.0), cv::Point3f(0.0,0.08,0.0), cv::Point3f(0.04,0.08,0.0), cv::Point3f(0.04,0.12,0.0), cv::Point3f(0.00,0.12,0.0), // sheep's anatomical bottom right
+                                             cv::Point3f(0.0,0.0,-0.06), cv::Point3f(0.04,0.0,-0.06), cv::Point3f(0.04,0.04,-0.06), cv::Point3f(0.0,0.04,-0.06), cv::Point3f(0.12,0.0,-0.06), cv::Point3f(0.16,0.0,-0.06), cv::Point3f(0.16,0.04,-0.06), cv::Point3f(0.12,0.04,-0.06), // sheep's anatomical middle layer left
+                                             cv::Point3f(0.12,0.08,-0.06), cv::Point3f(0.16,0.08,-0.06), cv::Point3f(0.16,0.12,-0.06), cv::Point3f(0.12,0.12,-0.06), cv::Point3f(0.0,0.08,-0.06), cv::Point3f(0.04,0.08,-0.06), cv::Point3f(0.04,0.12,-0.06), cv::Point3f(0.00,0.12,-0.06), // sheep's anatomical middle layer right
+            // top square of sheep body
+                                             cv::Point3f(0.0,0.0,-0.12), cv::Point3f(0.16,0.0,-0.12), cv::Point3f(0.16,0.12,-0.12), cv::Point3f(0.0,0.12,-0.12),
+            // head bottom
+                                             cv::Point3f(.16,.04,-.06), cv::Point3f(.2,.04,-.06), cv::Point3f(.2,.08,-.06), cv::Point3f(.16,.08,-.06),
+            // head top
+                                             cv::Point3f(.16,.04,-.12), cv::Point3f(.2,.04,-.12), cv::Point3f(.2,.08,-.12), cv::Point3f(.16,.08,-.12),
+
+    };
+
+    object_map["sheep_hex"] = sheep_points;
+    object_map["sheep_res"] = sheep_points;
+
+
+    std::vector<cv::Point3f> ore_hex_points = {cv::Point3f(-0.04,0.0,0.0), cv::Point3f(-0.04,0.04/1.5,0.0),cv::Point3f(-0.02,0.08/1.5,0.0), cv::Point3f(0.02,0.08/1.5,0.0), cv::Point3f(0.04,0.04/1.5,0.0),cv::Point3f(0.04,0.0,0.0), // base outside
+                                               cv::Point3f(-0.02,0.04/1.5,0.0), cv::Point3f(0.02,0.04/1.5,0.0),  cv::Point3f(0.02, 0.0,0.0), cv::Point3f(-0.02, 0.0,0.0), // base inside
+
+                                               cv::Point3f(-0.04,0.0,0.04), cv::Point3f(-0.04,0.04/1.5,0.04),cv::Point3f(-0.02,0.08/1.5,0.04), cv::Point3f(0.02,0.08/1.5,0.04), cv::Point3f(0.04,0.04/1.5,0.04),cv::Point3f(0.04,0.0,0.04), // layer 2 outside
+                                               cv::Point3f(-0.02,0.04/1.5,0.04), cv::Point3f(0.02,0.04/1.5,0.04),  cv::Point3f(0.02, 0.0,0.04), cv::Point3f(-0.02, 0.0,0.04), // layer 2 inside
+
+                                               cv::Point3f(-.03, 0.08/1.5/2, .06), cv::Point3f(.03, 0.08/1.5/2, .06), cv::Point3f(-.03, 0.02/1.5/2, .06), cv::Point3f(.03, 0.02/1.5/2, .06) // mountain peaks
+    };
+
+
+    object_map["ore_hex"] = ore_hex_points;
+
+    // All the points for the 3D models of resource cards
+    std::vector<cv::Point3f> wood_points = {cv::Point3f(1/20.0,1/20.0, 0.0), cv::Point3f(1.5/20.0,1/20.0, 0.0), cv::Point3f(.5/20.0,2/20.0, 0.0), cv::Point3f(2/20.0,2/20.0, 0.0),cv::Point3f(1/20.0,3/20.0, 0.0), cv::Point3f(1.5/20.0,3/20.0, 0.0),
+                                            cv::Point3f(1/20.0,1/20.0,-2/10.0), cv::Point3f(1.5/20.0,1/20.0,-2/10.0), cv::Point3f(.5/20.0,2/20.0,-2/10.0), cv::Point3f(2/20.0,2/20.0,-2/10.0),cv::Point3f(1/20.0,3/20.0,-2/10.0), cv::Point3f(1.5/20.0,3/20.0,-2/10.0)};
+
+
+
+
+    std::vector<cv::Point3f> brick_points = {cv::Point3f(0.0, 0.0, 0.0), cv::Point3f(0.10, 0.0, 0.0), cv::Point3f(0.10, 0.05, 0.0), cv::Point3f(0.0, 0.05, 0.0),
+                                             cv::Point3f(0.0, 0.0, -0.05), cv::Point3f(0.10, 0.0, -0.05), cv::Point3f(0.10, 0.05, -0.05), cv::Point3f(0.0, 0.05, -0.05),};
+
+    std::vector<cv::Point3f> ore_points = {cv::Point3f(0.00,0.00,0.0), cv::Point3f(0.1, 0.00,0.00), cv::Point3f(0.05, 0.1, 0.00), cv::Point3f(0.05, 0.05, -.1)};
+
+
+    int w = 0.04; // the sword is built using multiples of .04 for distances between points
+    std::vector<cv::Point3f> knight_points = {
+            cv::Point3f(1.5 * w, 0.5 * w, 0.0 * w), // the point at the bottom
+
+            // middle pieces
+            cv::Point3f(1.0 * w, 0.0 * w, 0.5 * w), cv::Point3f(2.0 * w, 0.0 * w, 0.5 * w), cv::Point3f(1.0 * w, 1.0 * w, 0.5 * w), cv::Point3f(2.0 * w, 1.0 * w, 0.5 * w), // first square layer, connects to bottom
+            cv::Point3f(1.0 * w, 0.0 * w, 2.0 * w), cv::Point3f(2.0 * w, 0.0 * w, 2.0 * w), cv::Point3f(1.0 * w, 1.0 * w, 2.0 * w), cv::Point3f(2.0 * w, 1.0 * w, 2.0 * w), // end of sword part of sword, middle
+            cv::Point3f(1.0 * w, 0.0 * w, 3.0 * w), cv::Point3f(2.0 * w, 0.0 * w, 3.0 * w), cv::Point3f(1.0 * w, 1.0 * w, 3.0 * w), cv::Point3f(2.0 * w, 1.0 * w, 3.0 * w), // top middle of handle guard piece
+            cv::Point3f(1.0 * w, 0.0 * w, 3.5 * w), cv::Point3f(2.0 * w, 0.0 * w, 3.5 * w), cv::Point3f(1.0 * w, 1.0 * w, 3.5 * w), cv::Point3f(2.0 * w, 1.0 * w, 3.5 * w), // handle top, middle piece
+
+            // side pieces
+            cv::Point3f(0.0 * w, 0.0 * w, 2.0 * w), cv::Point3f(3.0 * w, 0.0 * w, 2.0 * w), cv::Point3f(0.0 * w, 1.0 * w, 2.0 * w), cv::Point3f(3.0 * w, 1.0 * w, 2.0 * w), // corners of beginning of handle
+            cv::Point3f(0.0 * w, 0.0 * w, 3.0 * w), cv::Point3f(3.0 * w, 0.0 * w, 3.0 * w), cv::Point3f(0.0 * w, 1.0 * w, 3.0 * w), cv::Point3f(3.0 * w, 1.0 * w, 3.0 * w), // top sides of handle guard piece
+    };
+
+    return object_map;
+}
+
+
 /**
  * Draws a brick from image points - just a rectangular box
  * @param frame frame to draw on
@@ -202,7 +287,100 @@ int draw_knight(cv::Mat &frame, std::vector<cv::Point2f> img_points) {
 
         }
     }
+}
+
+void draw_wood_hex(cv::Mat &frame, std::vector<cv::Point2f> img_points) {
+    for (int i = 0; i < 4; i++) {
+        if (i != 3) {
+            cv::line(frame, img_points.at(i), img_points.at(i + 1), cv::Scalar(20,70,140), 5);
+            cv::line(frame, img_points.at(i + 4), img_points.at(i + 8), cv::Scalar(0,255,0), 5);
+
+        } else {
+            cv::line(frame, img_points.at(i), img_points.at(i - 3), cv::Scalar(20,70,140), 5);
+        }
+        cv::line(frame, img_points.at(i), img_points.at(i + 4), cv::Scalar(20,70,140), 5);
+        cv::line(frame, img_points.at(i + 8), img_points.at(i + 12), cv::Scalar(0,255,0), 5);
+        cv::line(frame, img_points.at(i + 12), img_points.at(i + 16), cv::Scalar(0,255,0), 5);
+
+    }
+    cv::line(frame, img_points.at(8), img_points.at(11), cv::Scalar(0,255,0), 5);
+    cv::line(frame, img_points.at(9), img_points.at(10), cv::Scalar(0,255,0), 5);
+    cv::line(frame, img_points.at(12), img_points.at(15), cv::Scalar(0,255,0), 5);
+    cv::line(frame, img_points.at(13), img_points.at(14), cv::Scalar(0,255,0), 5);
+    cv::line(frame, img_points.at(16), img_points.at(19), cv::Scalar(0,255,0), 5);
+    cv::line(frame, img_points.at(17), img_points.at(18), cv::Scalar(0,255,0), 5);
+    cv::line(frame, img_points.at(16), img_points.at(20), cv::Scalar(0,255,0), 5);
+    cv::line(frame, img_points.at(17), img_points.at(20), cv::Scalar(0,255,0), 5);
+    cv::line(frame, img_points.at(18), img_points.at(21), cv::Scalar(0,255,0), 5);
+    cv::line(frame, img_points.at(19), img_points.at(21), cv::Scalar(0,255,0), 5);
+
+}
+
+void draw_ore_hex(cv::Mat &frame, std::vector<cv::Point2f> img_points) {
+    for(int i = 0; i < 5; i++) {
+        cv::line(frame, img_points.at(i), img_points.at(i + 1), cv::Scalar(80,80,80),5); // connect base
+        cv::line(frame, img_points.at(i + 10), img_points.at(i + 11), cv::Scalar(80,80,80),5); // connect middle
+        cv::line(frame, img_points.at(i), img_points.at(i + 10), cv::Scalar(80,80,80),5); // connect base to middle
+    }
 
 
+    cv::line(frame, img_points.at(0), img_points.at(9), cv::Scalar(80,80,80),5); // connect outside front
+    cv::line(frame, img_points.at(5), img_points.at(8), cv::Scalar(80,80,80),5); // connect outside front
+    cv::line(frame, img_points.at(10), img_points.at(19), cv::Scalar(80,80,80),5); // connect outside front
+    cv::line(frame, img_points.at(15), img_points.at(18), cv::Scalar(80,80,80),5); // connect outside front
 
+    cv::line(frame, img_points.at(9), img_points.at(19), cv::Scalar(80,80,80),5); // connect outside front
+    cv::line(frame, img_points.at(8), img_points.at(18), cv::Scalar(80,80,80),5); // connect outside front
+
+    for (int i = 6; i < 8; i++) {
+        if (i == 6) {
+            cv::line(frame, img_points.at(i), img_points.at(i + 3), cv::Scalar(80,80,80),5); // connect inside part of base
+            cv::line(frame, img_points.at(i + 10), img_points.at(i + 13), cv::Scalar(80,80,80),5); // connect inside part of base
+
+        }
+        cv::line(frame, img_points.at(i), img_points.at(i + 1), cv::Scalar(80,80,80),5); // connect inside part of base
+        cv::line(frame, img_points.at(i + 10), img_points.at(i + 11), cv::Scalar(80,80,80),5); // connect inside part of base
+        cv::line(frame, img_points.at(i), img_points.at(i + 10), cv::Scalar(80,80,80),5); // connect inside base to middle inside
+    }
+
+
+    // connect peaks
+
+    cv::line(frame, img_points.at(20), img_points.at(20 - 9), cv::Scalar(80,80,80),5);
+    cv::line(frame, img_points.at(20), img_points.at(20 - 8), cv::Scalar(80,80,80),5);
+    cv::line(frame, img_points.at(20), img_points.at(20 - 4), cv::Scalar(80,80,80),5);
+
+    cv::line(frame, img_points.at(22), img_points.at(11), cv::Scalar(80,80,80),5);
+    cv::line(frame, img_points.at(22), img_points.at(16), cv::Scalar(80,80,80),5);
+    cv::line(frame, img_points.at(22), img_points.at(10), cv::Scalar(80,80,80),5);
+    cv::line(frame, img_points.at(22), img_points.at(19), cv::Scalar(80,80,80),5);
+
+    cv::line(frame, img_points.at(21), img_points.at(13), cv::Scalar(80,80,80),5);
+    cv::line(frame, img_points.at(21), img_points.at(17), cv::Scalar(80,80,80),5);
+    cv::line(frame, img_points.at(21), img_points.at(14), cv::Scalar(80,80,80),5);
+
+    cv::line(frame, img_points.at(23), img_points.at(17), cv::Scalar(80,80,80),5);
+    cv::line(frame, img_points.at(23), img_points.at(14), cv::Scalar(80,80,80),5);
+    cv::line(frame, img_points.at(23), img_points.at(15), cv::Scalar(80,80,80),5);
+    cv::line(frame, img_points.at(23), img_points.at(18), cv::Scalar(80,80,80),5);
+
+}
+
+void solve_and_draw(std::vector<int> marker_ids, std::vector<cv::Vec3d> rvecs, std::vector<cv::Vec3d> tvecs, std::unordered_map<std::string, std::vector<cv::Point3f>> object_map, std::vector<double> distortion_coefficients, cv::Mat camera_matrix, cv::Mat output_frame) {
+    for (int i=0; i < marker_ids.size(); i++) {
+        std::vector<cv::Point2f> img_points; // 2D calculated points to draw
+        if (marker_ids.at(i) == 10 || marker_ids.at(i) == 15) {
+            cv::projectPoints(object_map["wheat_hex"], rvecs.at(i), tvecs.at(i), camera_matrix, distortion_coefficients, img_points);
+            draw_wheat(output_frame, img_points);
+        }
+
+        if (marker_ids.at(i) == 20) {
+            cv::projectPoints(object_map["ore_hex"], rvecs.at(i), tvecs.at(i), camera_matrix, distortion_coefficients, img_points);
+            draw_ore_hex(output_frame, img_points);
+        }
+        if (marker_ids.at(i) == 30) {
+            cv::projectPoints(object_map["wood_hex"], rvecs.at(i), tvecs.at(i), camera_matrix, distortion_coefficients, img_points);
+            draw_wood_hex(output_frame, img_points);
+        }
+    }
 }

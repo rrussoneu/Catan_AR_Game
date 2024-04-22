@@ -18,7 +18,7 @@ int main() {
     fs["distortion_coefficients"] >> distCoeffs;
     fs.release();
 
-
+    /*
     std::vector<cv::Point3f> sheep_points = {cv::Point3f(0.0,0.0,0.0), cv::Point3f(0.04,0.0,0.0), cv::Point3f(0.04,0.04,0.0), cv::Point3f(0.0,0.04,0.0), cv::Point3f(0.12,0.0,0.0), cv::Point3f(0.16,0.0,0.0), cv::Point3f(0.16,0.04,0.0), cv::Point3f(0.12,0.04,0.0), // sheep's anatomical bottom left
                                              cv::Point3f(0.12,0.08,0.0), cv::Point3f(0.16,0.08,0.0), cv::Point3f(0.16,0.12,0.0), cv::Point3f(0.12,0.12,0.0), cv::Point3f(0.0,0.08,0.0), cv::Point3f(0.04,0.08,0.0), cv::Point3f(0.04,0.12,0.0), cv::Point3f(0.00,0.12,0.0), // sheep's anatomical bottom right
                                              cv::Point3f(0.0,0.0,0.06), cv::Point3f(0.04,0.0,0.06), cv::Point3f(0.04,0.04,0.06), cv::Point3f(0.0,0.04,0.06), cv::Point3f(0.12,0.0,0.06), cv::Point3f(0.16,0.0,0.06), cv::Point3f(0.16,0.04,0.06), cv::Point3f(0.12,0.04,0.06), // sheep's anatomical middle layer left
@@ -46,6 +46,9 @@ int main() {
             cv::Point3f(0.0 * w, 0.0 * w, 2.0 * w), cv::Point3f(3.0 * w, 0.0 * w, 2.0 * w), cv::Point3f(0.0 * w, 1.0 * w, 2.0 * w), cv::Point3f(3.0 * w, 1.0 * w, 2.0 * w), // corners of beginning of handle
             cv::Point3f(0.0 * w, 0.0 * w, 3.0 * w), cv::Point3f(3.0 * w, 0.0 * w, 3.0 * w), cv::Point3f(0.0 * w, 1.0 * w, 3.0 * w), cv::Point3f(3.0 * w, 1.0 * w, 3.0 * w), // top sides of handle guard piece
     };
+     */
+
+    std::unordered_map<std::string, std::vector<cv::Point3f>> object_map = generate_3d_points();
 
 
     // Stored in order Blue, Green, Red, Brown
@@ -195,7 +198,8 @@ int main() {
         //brick_ids.push_back(49);
 
         std::unordered_map<std::string, std::unordered_map<int, std::vector < cv::Point2f>>> marker_maps = make_maps();
-
+        std::cout << "post map" << std::endl;
+        int size_check = marker_maps.size();
         /*
         // maps for the resource tiles
         std::unordered_map<int, std::vector<cv::Point2f>> desert_map;
@@ -249,32 +253,45 @@ int main() {
             cv::aruco::drawDetectedMarkers(out, marker_corners, marker_ids);
             //std::vector<int> brick_check;
 
-            map_markers(marker_ids, marker_maps);
+            if (size_check == 31) {
+                marker_maps = map_markers(marker_ids, marker_corners, marker_maps); // group markers and points together
+                std::cout << "post mapping" << std::endl;
 
+                // coords
+                cv::Mat obj_points(4, 1, CV_32FC3);
+                float marker_length = .027;
+                obj_points.ptr<cv::Vec3f>(0)[0] = cv::Vec3f(-marker_length/2.f, marker_length/2.f, 0);
+                obj_points.ptr<cv::Vec3f>(0)[1] = cv::Vec3f(marker_length/2.f, marker_length/2.f, 0);
+                obj_points.ptr<cv::Vec3f>(0)[2] = cv::Vec3f(marker_length/2.f, -marker_length/2.f, 0);
+                obj_points.ptr<cv::Vec3f>(0)[3] = cv::Vec3f(-marker_length/2.f, -marker_length/2.f, 0);
+
+
+                std::vector<cv::Vec3d> rvecs(marker_corners.size()), tvecs(marker_corners.size());
+
+                for (int i = 0; i < marker_corners.size(); i++) {
+                    solvePnP(obj_points, marker_corners.at(i), cameraMatrix, distCoeffs, rvecs.at(i), tvecs.at(i), cv::SOLVEPNP_ITERATIVE);
+                    cv::drawFrameAxes(out, cameraMatrix, distCoeffs, rvecs[i], tvecs[i], marker_length, 2);
+
+
+                }
+
+                handle_homography(marker_maps, homography_points, mats, frame, out);
+                std::cout << "post homography" << std::endl;
+
+                solve_and_draw(marker_ids, rvecs, tvecs, object_map, distCoeffs, cameraMatrix, out);
+
+            }
+
+            /*
             for (int i = 0; i < marker_ids.size(); i++) {
                 if (marker_ids.at(i) >= 43 && marker_ids.at(i) < 49) {
                     //brick_check.push_back(marker_ids.at(i));
                     marker_maps["brick_map"][marker_ids.at(i)] = marker_corners.at(i);
                 }
             }
-
-            // coords
-            cv::Mat obj_points(4, 1, CV_32FC3);
-            float marker_length = .027;
-            obj_points.ptr<cv::Vec3f>(0)[0] = cv::Vec3f(-marker_length/2.f, marker_length/2.f, 0);
-            obj_points.ptr<cv::Vec3f>(0)[1] = cv::Vec3f(marker_length/2.f, marker_length/2.f, 0);
-            obj_points.ptr<cv::Vec3f>(0)[2] = cv::Vec3f(marker_length/2.f, -marker_length/2.f, 0);
-            obj_points.ptr<cv::Vec3f>(0)[3] = cv::Vec3f(-marker_length/2.f, -marker_length/2.f, 0);
+             */
 
 
-            std::vector<cv::Vec3d> rvecs(marker_corners.size()), tvecs(marker_corners.size());
-
-            for (int i = 0; i < marker_corners.size(); i++) {
-                solvePnP(obj_points, marker_corners.at(i), cameraMatrix, distCoeffs, rvecs.at(i), tvecs.at(i), cv::SOLVEPNP_ITERATIVE);
-                cv::drawFrameAxes(out, cameraMatrix, distCoeffs, rvecs[i], tvecs[i], marker_length, 2);
-
-
-            }
 
             // do homography first and draw on top of the resulting frame for the shapes
             /*
@@ -347,9 +364,8 @@ int main() {
                 }
             }
             */
-            handle_homography(marker_maps, homography_points, mats, frame, out);
 
-            for (int j = 0; j < marker_ids.size(); j++) {
+            //for (int j = 0; j < marker_ids.size(); j++) {
 
 
                 /*
@@ -380,8 +396,11 @@ int main() {
                 }
                  */
 
-            }
+            //}
 
+
+
+            /*
             for (int j = 0; j < marker_ids.size(); j++) {
                 if (marker_ids.at(j) == 49) {
                     std::vector<cv::Point2f> img_points; // 2D calculated points to draw
@@ -389,6 +408,7 @@ int main() {
                     draw_knight(out, img_points);
                 }
             }
+             */
 
         }
 
