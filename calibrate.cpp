@@ -1,9 +1,8 @@
 // A program to calibrate and save camera settings
+// While 5 are required, the more images the more accurate, with aruco markers for the game this greatly helps
 
 #include <iostream>
-#include <opencv2/aruco.hpp>
 #include "opencv2/opencv.hpp"
-#include <opencv2/aruco/charuco.hpp>
 #include <opencv2/aruco/aruco_calib.hpp>
 #include <opencv2/highgui.hpp>
 #include <opencv2/objdetect/charuco_detector.hpp>

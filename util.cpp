@@ -5,6 +5,47 @@
 #include <iostream>
 #include "util.h"
 
+std::vector<cv::Mat> get_images() {
+    cv::Mat desert_hex_mat = cv::imread("res/hexes/desert_hex.png");
+    cv::Mat wheat_hex_mat = cv::imread("res/hexes/wheat_hex.png");
+    cv::Mat ore_hex_mat = cv::imread("res/hexes/ore_hex.png");
+    cv::Mat wood_hex_mat = cv::imread("res/hexes/wood_hex.png");
+    cv::Mat sheep_hex_mat = cv::imread("res/hexes/sheep_hex.png");
+    cv::Mat brick_hex_mat = cv::imread("res/hexes/brick_hex.png");
+
+    cv::Mat wheat_res_mat = cv::imread("res/resource_cards/wheat_res.png");
+    cv::Mat ore_res_mat = cv::imread("res/resource_cards/ore_res.png");
+    cv::Mat wood_res_mat = cv::imread("res/resource_cards/wood_res.png");
+    cv::Mat sheep_res_mat = cv::imread("res/resource_cards/sheep_res.png");
+    cv::Mat brick_res_mat = cv::imread("res/resource_cards/brick_res.png");
+
+    cv::Mat vp_mat = cv::imread("res/dev_cards/vp_dev.png");
+    cv::Mat knight_mat = cv::imread("res/dev_cards/knight_dev.png");
+    cv::Mat monopoly_mat = cv::imread("res/dev_cards/monopoly_dev.png");
+    cv::Mat yop_mat = cv::imread("res/dev_cards/yop_dev.png");
+    cv::Mat rb_mat = cv::imread("res/dev_cards/rb_dev.png");
+
+    std::vector<cv::Mat> mats;
+    mats.push_back(desert_hex_mat);
+    mats.push_back(wheat_hex_mat);
+    mats.push_back(ore_hex_mat);
+    mats.push_back(wood_hex_mat);
+    mats.push_back(sheep_hex_mat);
+    mats.push_back(brick_hex_mat);
+
+    mats.push_back(wheat_res_mat);
+    mats.push_back(ore_res_mat);
+    mats.push_back(wood_res_mat);
+    mats.push_back(sheep_res_mat);
+    mats.push_back(brick_res_mat);
+
+    mats.push_back(vp_mat);
+    mats.push_back(knight_mat);
+    mats.push_back(monopoly_mat);
+    mats.push_back(yop_mat);
+    mats.push_back(rb_mat);
+    return mats;
+}
 
 int print_turn(std::vector<int> scores, std::vector<int> roads, int dice_roll) {
     std::cout << "Blue Points: " << scores.at(0) << "\n Blue roads: \n" << roads.at(0)
@@ -35,6 +76,13 @@ std::vector<std::vector<cv::Point2f>> get_homography_points(std::vector<cv::Mat>
 
     return point_vector;
 }
+
+cv::Mat handle_alpha(cv::Mat mat) {
+    cv::Mat output_a;
+    cv::cvtColor(mat, output_a, cv::COLOR_BGR2BGRA);
+
+    return output_a;
+};
 
 void compute_homography(int aruco_id, std::unordered_map<int, std::vector<cv::Point2f>> marker_map, std::vector<cv::Point2f> img_pts, cv::Mat hex_mat, cv::Mat frame, cv::Mat out) {
     try {

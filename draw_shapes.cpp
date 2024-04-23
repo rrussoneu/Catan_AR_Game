@@ -17,51 +17,28 @@ std::unordered_map<std::string, std::vector<cv::Point3f>> generate_3d_points() {
     };
     object_map["wood_hex"] = wood_hex_points;
 
-    /*
-    std::vector<cv::Point3f> wheat_points = {cv::Point3f(0.06+ .02, 0.0,0.0), cv::Point3f(0.1 + .02, 0.0,0.00), cv::Point3f(0.1+ .02, 0.04, 0.00), cv::Point3f(0.08, 0.04, 0.00), // base
-                                             cv::Point3f(0.06+ .02, 0.0,-0.06), cv::Point3f(0.1+ .02, 0.0,-0.06), cv::Point3f(0.1+ .02, 0.04, -0.06), cv::Point3f(0.06+ .02, 0.04, -0.06), // middle
-                                             cv::Point3f(0.06+ .02, 0.0,-0.12), cv::Point3f(0.1+ .02, 0.0,-0.12), cv::Point3f(0.1+ .02, 0.04, -0.12), cv::Point3f(0.06+ .02, 0.04, -0.12), // top middle
-                                             cv::Point3f(0.06 - .06, 0.0,-0.12), cv::Point3f(0.1- .06, 0.0,-0.12), cv::Point3f(0.1- .06, 0.04, -0.12), cv::Point3f(0.06 - .06, 0.04, -0.12), // top left
-                                             cv::Point3f(0.06 + .06+ .02, 0.0,-0.12), cv::Point3f(0.1+ .06+ .02, 0.0,-0.12), cv::Point3f(0.1+ .06+ .02, 0.04, -0.12), cv::Point3f(0.06 + .06+ .02, 0.04, -0.12) // top right
-    };
-     */
     std::vector<cv::Point3f> wheat_points = {cv::Point3f(-.015, 0.0,0.0), cv::Point3f(.015, 0.0,0.00), cv::Point3f(.015, -0.015, 0.00), cv::Point3f(-.015, -0.015, 0.00), // base
                                              cv::Point3f(-.015, 0.0,0.04), cv::Point3f(.015, 0.0,0.04), cv::Point3f(0.015, -0.015, 0.04), cv::Point3f(-0.015, -0.015, 0.04), // middle
                                              cv::Point3f(-.015, 0.0,0.06), cv::Point3f(.015, 0.0,0.06), cv::Point3f(0.015, -0.015, 0.06), cv::Point3f(-0.015, -0.015, 0.06), // middle
                                              cv::Point3f(-.055, 0.0,0.06), cv::Point3f(-.025, 0.0,0.06), cv::Point3f(-.025, -0.015, 0.06), cv::Point3f(-.055, -0.015, 0.06), // top left
                                              cv::Point3f(.025, 0.0,0.06), cv::Point3f(0.055, 0.0,0.06), cv::Point3f(0.055, -0.015, 0.06), cv::Point3f(.025, -.015, 0.06) // top right
     };
-
     object_map["wheat_hex"] = wheat_points;
     object_map["wheat_res"] = wheat_points;
-    /*
-    std::vector<cv::Point3f> sheep_points = {cv::Point3f(0.0,0.0,0.0), cv::Point3f(0.04,0.0,0.0), cv::Point3f(0.04,0.04,0.0), cv::Point3f(0.0,0.04,0.0), cv::Point3f(0.12,0.0,0.0), cv::Point3f(0.16,0.0,0.0), cv::Point3f(0.16,0.04,0.0), cv::Point3f(0.12,0.04,0.0), // sheep's anatomical bottom left
-                                             cv::Point3f(0.12,0.08,0.0), cv::Point3f(0.16,0.08,0.0), cv::Point3f(0.16,0.12,0.0), cv::Point3f(0.12,0.12,0.0), cv::Point3f(0.0,0.08,0.0), cv::Point3f(0.04,0.08,0.0), cv::Point3f(0.04,0.12,0.0), cv::Point3f(0.00,0.12,0.0), // sheep's anatomical bottom right
-                                             cv::Point3f(0.0,0.0,-0.06), cv::Point3f(0.04,0.0,-0.06), cv::Point3f(0.04,0.04,-0.06), cv::Point3f(0.0,0.04,-0.06), cv::Point3f(0.12,0.0,-0.06), cv::Point3f(0.16,0.0,-0.06), cv::Point3f(0.16,0.04,-0.06), cv::Point3f(0.12,0.04,-0.06), // sheep's anatomical middle layer left
-                                             cv::Point3f(0.12,0.08,-0.06), cv::Point3f(0.16,0.08,-0.06), cv::Point3f(0.16,0.12,-0.06), cv::Point3f(0.12,0.12,-0.06), cv::Point3f(0.0,0.08,-0.06), cv::Point3f(0.04,0.08,-0.06), cv::Point3f(0.04,0.12,-0.06), cv::Point3f(0.00,0.12,-0.06), // sheep's anatomical middle layer right
+
+
+    std::vector<cv::Point3f> sheep_points = {cv::Point3f(0.0,0.0,0.0), cv::Point3f(0.04/3,0.0,0.0), cv::Point3f(0.04/3,0.04/3,0.0), cv::Point3f(0.0,0.04/3,0.0), cv::Point3f(0.12/3,0.0,0.0), cv::Point3f(0.16/3,0.0,0.0), cv::Point3f(0.16/3,0.04/3,0.0), cv::Point3f(0.12/3,0.04/3,0.0), // sheep's anatomical bottom left
+                                             cv::Point3f(0.12/3,0.08/3,0.0), cv::Point3f(0.16/3,0.08/3,0.0), cv::Point3f(0.16/3,0.12/3,0.0), cv::Point3f(0.12/3,0.12/3,0.0), cv::Point3f(0.0,0.08/3,0.0), cv::Point3f(0.04/3,0.08/3,0.0), cv::Point3f(0.04/3,0.12/3,0.0), cv::Point3f(0.00,0.12/3,0.0), // sheep's anatomical bottom right
+                                             cv::Point3f(0.0,0.0,0.06/3), cv::Point3f(0.04/3,0.0,0.06/3), cv::Point3f(0.04/3,0.04/3,0.06/3), cv::Point3f(0.0,0.04/3,0.06/3), cv::Point3f(0.12/3,0.0,0.06/3), cv::Point3f(0.16/3,0.0,0.06/3), cv::Point3f(0.16/3,0.04/3,0.06/3), cv::Point3f(0.12/3,0.04/3,0.06/3), // sheep's anatomical middle layer left
+                                             cv::Point3f(0.12/3,0.08/3,0.06/3), cv::Point3f(0.16/3,0.08/3,0.06/3), cv::Point3f(0.16/3,0.12/3,0.06/3), cv::Point3f(0.12/3,0.12/3,0.06/3), cv::Point3f(0.0,0.08/3,0.06/3), cv::Point3f(0.04/3,0.08/3,0.06/3), cv::Point3f(0.04/3,0.12/3,0.06/3), cv::Point3f(0.00,0.12/3,0.06/3), // sheep's anatomical middle layer right
             // top square of sheep body
-                                             cv::Point3f(0.0,0.0,-0.12), cv::Point3f(0.16,0.0,-0.12), cv::Point3f(0.16,0.12,-0.12), cv::Point3f(0.0,0.12,-0.12),
+                                             cv::Point3f(0.0,0.0,0.12/3), cv::Point3f(0.16/3,0.0,0.12/3), cv::Point3f(0.16/3,0.12/3,0.12/3), cv::Point3f(0.0,0.12/3,0.12/3),
             // head bottom
-                                             cv::Point3f(.16,.04,-.06), cv::Point3f(.2,.04,-.06), cv::Point3f(.2,.08,-.06), cv::Point3f(.16,.08,-.06),
+                                             cv::Point3f(.16/3,.04/3,.06/3), cv::Point3f(.2/3,.04/3,.06/3), cv::Point3f(.2/3,.08/3,.06/3), cv::Point3f(.16/3,.08/3,.06/3),
             // head top
-                                             cv::Point3f(.16,.04,-.12), cv::Point3f(.2,.04,-.12), cv::Point3f(.2,.08,-.12), cv::Point3f(.16,.08,-.12),
+                                             cv::Point3f(.16/3,.04/3,.12/3), cv::Point3f(.2/3,.04/3,.12/3), cv::Point3f(.2/3,.08/3,.12/3), cv::Point3f(.16/3,.08/3,.12/3),
 
     };
-    */
-    float sheep_w = .02;
-    std::vector<cv::Point3f> sheep_points = {cv::Point3f(-0.04,0.0 +sheep_w ,0.0), cv::Point3f(-0.02,0.0+sheep_w,0.0), cv::Point3f(-0.02,-0.02+sheep_w,0.0), cv::Point3f(-0.04,-.02+sheep_w,0.0), cv::Point3f(0.02,0.0+sheep_w,0.0), cv::Point3f(0.04,0.0+sheep_w,0.0), cv::Point3f(0.04,-.02+sheep_w,0.0), cv::Point3f(0.02,-0.02+sheep_w,0.0), // sheep's anatomical bottom left
-                                             cv::Point3f(sheep_w,(-3*sheep_w) + sheep_w ,0.0), cv::Point3f(sheep_w*2,(-3*sheep_w) + sheep_w,0.0), cv::Point3f(sheep_w*2,(-4*sheep_w) + sheep_w,0.0), cv::Point3f(sheep_w,-3*sheep_w + sheep_w,0.0), cv::Point3f(-2*sheep_w,-2*sheep_w + sheep_w,0.0), cv::Point3f(-sheep_w,-2*sheep_w + sheep_w,0.0), cv::Point3f(-sheep_w,-3*sheep_w + sheep_w,0.0), cv::Point3f(-2*sheep_w,-3*sheep_w + sheep_w,0.0), // sheep's anatomical bottom right
-                                             cv::Point3f(-0.04,0.0 +sheep_w ,0.0), cv::Point3f(-0.02,0.0+sheep_w,0.0), cv::Point3f(-0.02,-0.02+sheep_w,0.0), cv::Point3f(-0.04,-.02+sheep_w,0.0), cv::Point3f(0.02,0.0+sheep_w,0.0), cv::Point3f(0.04,0.0+sheep_w,0.0), cv::Point3f(0.04,-.02+sheep_w,0.0), cv::Point3f(0.02,-0.02+sheep_w,0.0), // sheep's anatomical bottom left
-                                             cv::Point3f(sheep_w,(-3*sheep_w) + sheep_w ,0.0), cv::Point3f(sheep_w*2,(-3*sheep_w) + sheep_w,0.0), cv::Point3f(sheep_w*2,(-4*sheep_w) + sheep_w,0.0), cv::Point3f(sheep_w,-3*sheep_w + sheep_w,0.0), cv::Point3f(-2*sheep_w,-2*sheep_w + sheep_w,0.0), cv::Point3f(-sheep_w,-2*sheep_w + sheep_w,0.0), cv::Point3f(-sheep_w,-3*sheep_w + sheep_w,0.0), cv::Point3f(-2*sheep_w,-3*sheep_w + sheep_w,0.0), // sheep's anatomical bottom right
-            // top square of sheep body
-                                             cv::Point3f(0.0,0.0,0.12), cv::Point3f(0.16,0.0,0.12), cv::Point3f(0.16,0.12,0.12), cv::Point3f(0.0,0.12,0.12),
-            // head bottom
-                                             cv::Point3f(.16,.04,.06), cv::Point3f(.2,.04,.06), cv::Point3f(.2,.08,.06), cv::Point3f(.16,.08,.06),
-            // head top
-                                             cv::Point3f(.16,.04,.12), cv::Point3f(.2,.04,.12), cv::Point3f(.2,.08,.12), cv::Point3f(.16,.08,.12),
-
-    };
-
     object_map["sheep_hex"] = sheep_points;
     object_map["sheep_res"] = sheep_points;
 
@@ -74,8 +51,6 @@ std::unordered_map<std::string, std::vector<cv::Point3f>> generate_3d_points() {
 
                                                cv::Point3f(-.03, 0.08/1.5/2, .06), cv::Point3f(.03, 0.08/1.5/2, .06), cv::Point3f(-.03, 0.02/1.5/2, .06), cv::Point3f(.03, 0.02/1.5/2, .06) // mountain peaks
     };
-
-
     object_map["ore_hex"] = ore_hex_points;
 
     std::vector<cv::Point3f> brick_hex_points = { cv::Point3f(-.09/2, .02/2, 0.0), cv::Point3f(-.03/2, .02/2, 0.0), cv::Point3f(.03/2, .02/2, 0.0), cv::Point3f(.09/2, .02/2, 0.0), // back of bottom
@@ -84,10 +59,9 @@ std::unordered_map<std::string, std::vector<cv::Point3f>> generate_3d_points() {
                                                   cv::Point3f(.09/2, -.04/2, 0.035),  cv::Point3f(.03/2, -.04/2, 0.035),  cv::Point3f(-.03/2, -.04/2, 0.035), cv::Point3f(-.09/2, -.04/2, 0.035), // front of middle
 
     };
-
     object_map["brick_hex"] = brick_hex_points;
 
-    // All the points for the 3D models of resource cards
+    // Points for the 3D models of resource cards
     std::vector<cv::Point3f> wood_points = {cv::Point3f(1/20.0,1/20.0, 0.0), cv::Point3f(1.5/20.0,1/20.0, 0.0), cv::Point3f(.5/20.0,2/20.0, 0.0), cv::Point3f(2/20.0,2/20.0, 0.0),cv::Point3f(1/20.0,3/20.0, 0.0), cv::Point3f(1.5/20.0,3/20.0, 0.0),
                                             cv::Point3f(1/20.0,1/20.0,-2/10.0), cv::Point3f(1.5/20.0,1/20.0,-2/10.0), cv::Point3f(.5/20.0,2/20.0,-2/10.0), cv::Point3f(2/20.0,2/20.0,-2/10.0),cv::Point3f(1/20.0,3/20.0,-2/10.0), cv::Point3f(1.5/20.0,3/20.0,-2/10.0)};
 
@@ -99,21 +73,18 @@ std::unordered_map<std::string, std::vector<cv::Point3f>> generate_3d_points() {
 
     std::vector<cv::Point3f> ore_points = {cv::Point3f(0.00,0.00,0.0), cv::Point3f(0.1, 0.00,0.00), cv::Point3f(0.05, 0.1, 0.00), cv::Point3f(0.05, 0.05, -.1)};
 
+    std::vector<cv::Point3f> wood_res_points = {
 
-    int w = 0.04; // the sword is built using multiples of .04 for distances between points
-    std::vector<cv::Point3f> knight_points = {
-            cv::Point3f(1.5 * w, 0.5 * w, 0.0 * w), // the point at the bottom
+            cv::Point3f(-0.005, -0.03, 0.0), cv::Point3f(0.005, -0.03, 0.0), cv::Point3f(0.005, 0.03, 0.0), cv::Point3f(-0.005, 0.03, 0.0),
+            cv::Point3f(-0.01, -0.03, 0.01), cv::Point3f(0.01, -0.03, 0.01), cv::Point3f(0.01, 0.03, 0.01), cv::Point3f(-0.01, 0.03, 0.01),
+            cv::Point3f(-0.01, -0.03, 0.02), cv::Point3f(0.01, -0.03, 0.02), cv::Point3f(0.01, 0.03, 0.02), cv::Point3f(-0.01, 0.03, 0.02),
+            cv::Point3f(-0.005, -0.03, 0.03), cv::Point3f(0.005, -0.03, 0.03), cv::Point3f(0.005, 0.03, 0.03), cv::Point3f(-0.005, 0.03, 0.03),
 
-            // middle pieces
-            cv::Point3f(1.0 * w, 0.0 * w, 0.5 * w), cv::Point3f(2.0 * w, 0.0 * w, 0.5 * w), cv::Point3f(1.0 * w, 1.0 * w, 0.5 * w), cv::Point3f(2.0 * w, 1.0 * w, 0.5 * w), // first square layer, connects to bottom
-            cv::Point3f(1.0 * w, 0.0 * w, 2.0 * w), cv::Point3f(2.0 * w, 0.0 * w, 2.0 * w), cv::Point3f(1.0 * w, 1.0 * w, 2.0 * w), cv::Point3f(2.0 * w, 1.0 * w, 2.0 * w), // end of sword part of sword, middle
-            cv::Point3f(1.0 * w, 0.0 * w, 3.0 * w), cv::Point3f(2.0 * w, 0.0 * w, 3.0 * w), cv::Point3f(1.0 * w, 1.0 * w, 3.0 * w), cv::Point3f(2.0 * w, 1.0 * w, 3.0 * w), // top middle of handle guard piece
-            cv::Point3f(1.0 * w, 0.0 * w, 3.5 * w), cv::Point3f(2.0 * w, 0.0 * w, 3.5 * w), cv::Point3f(1.0 * w, 1.0 * w, 3.5 * w), cv::Point3f(2.0 * w, 1.0 * w, 3.5 * w), // handle top, middle piece
-
-            // side pieces
-            cv::Point3f(0.0 * w, 0.0 * w, 2.0 * w), cv::Point3f(3.0 * w, 0.0 * w, 2.0 * w), cv::Point3f(0.0 * w, 1.0 * w, 2.0 * w), cv::Point3f(3.0 * w, 1.0 * w, 2.0 * w), // corners of beginning of handle
-            cv::Point3f(0.0 * w, 0.0 * w, 3.0 * w), cv::Point3f(3.0 * w, 0.0 * w, 3.0 * w), cv::Point3f(0.0 * w, 1.0 * w, 3.0 * w), cv::Point3f(3.0 * w, 1.0 * w, 3.0 * w), // top sides of handle guard piece
     };
+
+    object_map["wood_res"] = wood_res_points;
+
+    // Dev cards
 
     // giant plus, isn't really a great representation
     std::vector<cv::Point3f> yop_points = { cv::Point3f(0.0,0.0,0.0), cv::Point3f(-.04,0.0,0.05), cv::Point3f(0.04, 0.0, 0.05), cv::Point3f(0.0,0.0,0.1)};
@@ -153,6 +124,70 @@ std::unordered_map<std::string, std::vector<cv::Point3f>> generate_3d_points() {
     // road is simple, a thick line looks better than a rectangle
     std::vector<cv::Point3f> road_points = {cv::Point3f(-0.02, 0.0, 0.01), cv::Point3f(.02, 0.0, 0.01)};
     object_map["road"] = road_points;
+
+    // chalice
+    std::vector<cv::Point3f> vp_points {
+                                        // bottom
+                                        cv::Point3f(-.015, 0.0, 0.0), cv::Point3f(-.005,-0.01, 0.0), cv::Point3f(.005, -0.01, 0.0), cv::Point3f(.015, 0.0, 0.0),
+                                        cv::Point3f(.015, 0.01, 0.0),cv::Point3f(.005, 0.02, 0.0), cv::Point3f(-.005,0.02, 0.0), cv::Point3f(-0.015, 0.01, 0.0),
+
+                                        // middle of cup
+                                        cv::Point3f(-.015, 0.0, 0.035), cv::Point3f(-.005,-0.01, 0.035), cv::Point3f(.005, -0.01, 0.035), cv::Point3f(.015, 0.0, 0.035),
+                                        cv::Point3f(.015, 0.01, 0.035),cv::Point3f(.005, 0.02, 0.035), cv::Point3f(-.005,0.02, 0.035), cv::Point3f(-0.015, 0.01, 0.035),
+
+                                        cv::Point3f(-.015, 0.0, 0.05), cv::Point3f(-.005,-0.01, 0.05), cv::Point3f(.005, -0.01, 0.05), cv::Point3f(.015, 0.0, 0.05),
+                                        cv::Point3f(.015, 0.01, 0.05),cv::Point3f(.005, 0.02, 0.05), cv::Point3f(-.005,0.02, 0.05), cv::Point3f(-0.015, 0.01, 0.05),
+
+                                        // handle top
+                                        cv::Point3f(0.0,0.0,0.02),
+                                        // handle bottom
+                                        cv::Point3f(0.0,0.0,0.01)
+
+    };
+    object_map["vp"] = vp_points;
+
+    // Game pieces
+    std::vector<cv::Point3f> robber_points = {cv::Point3f(0.00,0.00,0.0), cv::Point3f(0.0, 0.00,0.035), cv::Point3f(0.0, 0.0, 0.05), cv::Point3f(0.005, 0.0, 0.035), cv::Point3f(-0.005,0.0,0.035)};
+    object_map["robber"] = robber_points;
+
+    std::vector<cv::Point3f> settlement_points = {  // bottom
+                                                    cv::Point3f(-0.015, 0.0, 0.0), cv::Point3f(0.015, 0.0, 0.0), cv::Point3f(0.015, -0.015, 0.0), cv::Point3f(-0.015,-0.015,0.0),
+                                                    // middle
+                                                    cv::Point3f(-0.015, 0.0, 0.02), cv::Point3f(0.015, 0.0, 0.02), cv::Point3f(0.015, -0.015, 0.02), cv::Point3f(-0.015,-0.015,0.02),
+                                                    // top
+                                                    cv::Point3f(-0.005, -0.0075, 0.03),
+                                                    cv::Point3f(0.005, -0.0075, 0.03),
+
+
+
+    };
+    object_map["settlement"] = settlement_points;
+
+    std::vector<cv::Point3f> city_points = {
+
+            // bottom
+            cv::Point3f(-0.015, 0.0, 0.0), cv::Point3f(0.005, 0.0, 0.0), cv::Point3f(0.005, -0.015, 0.0), cv::Point3f(-0.015,-0.015,0.0),
+            // middle
+            cv::Point3f(-0.015, 0.0, 0.02), cv::Point3f(0.005, 0.0, 0.02), cv::Point3f(0.005, -0.015, 0.02), cv::Point3f(-0.015,-0.015,0.02),
+
+            // base bottom
+            cv::Point3f(-0.015, 0.0, 0.0), cv::Point3f(0.005, 0.0, 0.0), cv::Point3f(0.005, -0.015, 0.0), cv::Point3f(-0.015,-0.015,0.0),
+            cv::Point3f(0.015, 0.0, 0.0), cv::Point3f(0.015, -0.015, 0.0),
+
+            // base middle
+            cv::Point3f(-0.015, 0.0, 0.02), cv::Point3f(0.015, 0.0, 0.02), cv::Point3f(0.015, -0.015, 0.02), cv::Point3f(-0.015,-0.015,0.02),
+            cv::Point3f(0.015, 0.0, 0.02), cv::Point3f(0.015, -0.015, 0.02),
+
+            // top
+            cv::Point3f(-0.005, -0.0075, 0.03),
+            cv::Point3f(0.005, -0.0075, 0.03),
+
+
+
+    };
+    object_map["city"] = city_points;
+
+
 
     return object_map;
 
@@ -317,47 +352,10 @@ int draw_wood(cv::Mat &frame, std::vector<cv::Point2f> img_points) {
     return 0;
 }
 
-int draw_knight(cv::Mat &frame, std::vector<cv::Point2f> img_points) {
-    for (int i = 1; i < 5; i++) {
-        // z axis oriented lines for middle
-        cv::line(frame, img_points.at(0), img_points.at(i), cv::Scalar(80,80,80), 5); // sword metal grey
-        cv::line(frame, img_points.at(i), img_points.at(i + 4), cv::Scalar(80,80,80), 5); // still sword metal
-        cv::line(frame, img_points.at(i + 4), img_points.at(i + 8), cv::Scalar(20,70,140), 5); // handle guard brown
-        cv::line(frame, img_points.at(i + 8), img_points.at(i + 12), cv::Scalar(80,80,80), 5); // handle grey
-    }
-
-    for (int i = 1; i < 5; i++) {
-        for (int j = 0; j < 4; j++) {
-            int idx = i + (4 * j);
-            // if this is one of the odd middle points, so we can draw lines along x from 1->2, 3->4, 5->6, etc.
-            if ((idx % 4) % 2 == 1 ) {
-                cv::line(frame, img_points.at(idx), img_points.at(idx + 1), cv::Scalar(80,80,80), 5);
-            }
-            // does y axis lines like 3->1, 4 -> 2 for the middle pieces
-            if (idx % 4> 2) {
-                cv::line(frame, img_points.at(idx), img_points.at(idx - 2), cv::Scalar(80,80,80), 5);
-            }
-        }
-    }
-
-    // connects the middle piece out to the sides of the handle
-    for (int i = 5; i < 9; i++) {
-        cv::line(frame, img_points.at(i), img_points.at(i +12), cv::Scalar(20,70,140), 5);
-        cv::line(frame, img_points.at(i + 4), img_points.at(i + 4 + 12), cv::Scalar(20,70,140), 5);
-    }
-
-    // connects the sides of the handle all together
-    for (int i = 17; i < 21; i++) {
-        // connect vertically/ z axis
-        cv::line(frame, img_points.at(i), img_points.at(i + 4), cv::Scalar(20,70,140), 5);
-
-        // connect along y
-        if (i < 19) {
-            cv::line(frame, img_points.at(i), img_points.at(i + 2), cv::Scalar(20,70,140), 5);
-            cv::line(frame, img_points.at(i + 4), img_points.at(i + 4 + 2), cv::Scalar(20,70,140), 5);
-
-        }
-    }
+void draw_robber(cv::Mat &frame, std::vector<cv::Point2f> img_points) {
+    cv::line(frame, img_points.at(0), img_points.at(1), cv::Scalar(80,80,80), 10);
+    cv::line(frame, img_points.at(1), img_points.at(2), cv::Scalar(20,70,140), 5);
+    cv::line(frame, img_points.at(3), img_points.at(4), cv::Scalar(20,70,140), 5);
 }
 
 void draw_wood_hex(cv::Mat &frame, std::vector<cv::Point2f> img_points) {
@@ -497,24 +495,140 @@ void draw_road_building(cv::Mat &frame, std::vector<cv::Point2f> img_points) { /
  * @param img_points points to connect
  * @param color 91, 94, 97, 100 for red, green, blue, brown
  */
-void draw_road(cv::Mat &frame, std::vector<cv::Point2f> img_points, int color) {
-    if (color == 91) {
-        cv::line(frame, img_points.at(0), img_points.at(1), cv::Scalar(0,0,255), 50);
+void draw_road(cv::Mat &frame, std::vector<cv::Point2f> img_points, cv::Scalar color) {
+    cv::line(frame, img_points.at(0), img_points.at(1), color, 30);
+}
+
+void draw_vp(cv::Mat &frame, std::vector<cv::Point2f> img_points) {
+    for (int i =0; i < 8; i++) {
+        if (i < 7) {
+            cv::line(frame, img_points.at(i), img_points.at(i + 1), cv::Scalar(50,170,210), 10);
+            cv::line(frame, img_points.at(i + 8), img_points.at(i + 9), cv::Scalar(50,170,210), 10);
+            cv::line(frame, img_points.at(i + 16), img_points.at(i + 17), cv::Scalar(50,170,210), 10);
+
+
+        }
+        cv::line(frame, img_points.at(i), img_points.at(img_points.size()-1), cv::Scalar(50,170,210), 10);
+        cv::line(frame, img_points.at(i+8), img_points.at(img_points.size()-2), cv::Scalar(50,170,210), 10);
+        cv::line(frame, img_points.at(i+8), img_points.at(i + 16), cv::Scalar(50,170,210), 10);
+
+
+        if (i == 0) {
+            cv::line(frame, img_points.at(i), img_points.at(i + 7), cv::Scalar(50,170,210), 10);
+            cv::line(frame, img_points.at(i + 8), img_points.at(i + 15), cv::Scalar(50,170,210), 10);
+            cv::line(frame, img_points.at(i + 16), img_points.at(i + 23), cv::Scalar(50,170,210), 10);
+
+
+        }
     }
-    if (color == 94) {
-        cv::line(frame, img_points.at(0), img_points.at(1), cv::Scalar(255,0,0), 50);
+    cv::line(frame, img_points.at(img_points.size()-1), img_points.at(img_points.size()-2), cv::Scalar(50,170,210), 10);
+
+}
+
+void draw_settlement(cv::Mat &frame, std::vector<cv::Point2f> img_points, cv::Scalar color) {
+    for (int i = 0; i < 4; i++) {
+        if (i < 3) {
+            cv::line(frame, img_points.at(i), img_points.at(i + 1), color, 5); // connect rectangle
+            cv::line(frame, img_points.at(i + 4), img_points.at(i + 5), color, 5); // connect rectangle
+
+
+        } else {
+            cv::line(frame, img_points.at(i), img_points.at(i - 3), color, 5); // connect left most
+            cv::line(frame, img_points.at(i + 4), img_points.at(i + 1), color, 5); // connect left most
+
+        }
+        cv::line(frame, img_points.at(i), img_points.at(i + 4), color, 5); // connect rectangles
+
     }
-    if (color == 97) {
-        cv::line(frame, img_points.at(0), img_points.at(1), cv::Scalar(0,255,0), 50);
+    cv::line(frame, img_points.at(4), img_points.at(8), color, 5); // connect top
+    cv::line(frame, img_points.at(7), img_points.at(8), color, 5); // connect top
+    cv::line(frame, img_points.at(5), img_points.at(9), color, 5); // connect top
+    cv::line(frame, img_points.at(6), img_points.at(9), color, 5); // connect top
+
+    cv::line(frame, img_points.at(img_points.size()-1), img_points.at(img_points.size()-2), color, 5); // connect top to itself
+}
+
+void draw_city(cv::Mat &frame, std::vector<cv::Point2f> img_points, cv::Scalar color) {
+    for (int i = 0; i < 4; i++) {
+        if (i < 3) {
+            cv::line(frame, img_points.at(i), img_points.at(i + 1), color, 5); // connect rectangle
+            cv::line(frame, img_points.at(i + 4), img_points.at(i + 5), color, 5); // connect rectangle
+
+
+        } else {
+            cv::line(frame, img_points.at(i), img_points.at(i - 3), color, 5); // connect left most
+            cv::line(frame, img_points.at(i + 4), img_points.at(i + 1), color, 5); // connect left most
+
+        }
+        cv::line(frame, img_points.at(i), img_points.at(i + 4), color, 5); // connect rectangles
+
     }
-    if (color == 100) {
-        cv::line(frame, img_points.at(0), img_points.at(1), cv::Scalar(20,70,140), 50);
+
+    for (int i = 8; i < 14; i++) {
+        if (i < 11) {
+            cv::line(frame, img_points.at(i), img_points.at(i + 1), color, 5); // connect rectangle
+            cv::line(frame, img_points.at(i + 6), img_points.at(i + 7), color, 5); // connect rectangle
+
+        }
+        if (i == 11) {
+            cv::line(frame, img_points.at(i), img_points.at(8), color, 5); // connect rectangle
+        }
+        if (i == 12) {
+            cv::line(frame, img_points.at(i), img_points.at(i + 1), color, 5); // connect rectangle
+            cv::line(frame, img_points.at(i), img_points.at(i + 6), color, 5); // connect rectangle
+            cv::line(frame, img_points.at(i+1), img_points.at(i + 7), color, 5); // connect rectangle
+
+        }
+
+    }
+    cv::line(frame, img_points.at(9), img_points.at(12), color, 5); // connect rectangle
+    cv::line(frame, img_points.at(10), img_points.at(13), color, 5); // connect rectangle
+    cv::line(frame, img_points.at(9+6), img_points.at(12+6), color, 5); // connect rectangle
+    cv::line(frame, img_points.at(10+6), img_points.at(13+6), color, 5); // connect rectangle
+
+    for (int i = 14; i < 18; i++) {
+        cv::line(frame, img_points.at(i-10), img_points.at(i), color, 5); // connect rectangle
+    }
+    cv::line(frame, img_points.at(4), img_points.at(img_points.size()-2), color, 5); // connect top
+    cv::line(frame, img_points.at(7), img_points.at(img_points.size()-2), color, 5); // connect top
+    cv::line(frame, img_points.at(5), img_points.at(img_points.size()-1), color, 5); // connect top
+    cv::line(frame, img_points.at(6), img_points.at(img_points.size()-1), color, 5); // connect top
+
+    cv::line(frame, img_points.at(img_points.size()-1), img_points.at(img_points.size()-2), color, 5); // connect top to itself
+}
+
+void draw_wood_res(cv::Mat &frame, std::vector<cv::Point2f> img_points) {
+    for (int i = 0; i < 4; i++) {
+        if (i != 3) {
+            cv::line(frame, img_points.at(i), img_points.at(i + 1), cv::Scalar(20,70,140), 5);
+            cv::line(frame, img_points.at(i + 4), img_points.at(i + 5), cv::Scalar(20,70,140), 5);
+            cv::line(frame, img_points.at(i + 8), img_points.at(i + 9), cv::Scalar(20,70,140), 5);
+            cv::line(frame, img_points.at(i + 12), img_points.at(i + 13), cv::Scalar(20,70,140), 5);
+            //cv::line(frame, img_points.at(i + 4), img_points.at(i + 5), cv::Scalar(20,70,140), 5);
+
+        } else {
+            cv::line(frame, img_points.at(i), img_points.at(i - 3), cv::Scalar(20,70,140), 5);
+            cv::line(frame, img_points.at(i + 4), img_points.at(i + 4 -3), cv::Scalar(20,70,140), 5);
+            cv::line(frame, img_points.at(i + 8), img_points.at(i + 8 -3), cv::Scalar(20,70,140), 5);
+            cv::line(frame, img_points.at(i + 12), img_points.at(i + 12 -3), cv::Scalar(20,70,140), 5);
+
+
+
+        }
+        cv::line(frame, img_points.at(i), img_points.at(i + 4), cv::Scalar(20,70,140), 5);
+        cv::line(frame, img_points.at(i + 4), img_points.at(i + 8), cv::Scalar(20,70,140), 5);
+        cv::line(frame, img_points.at(i + 8), img_points.at(i + 12), cv::Scalar(20,70,140), 5);
     }
 }
+
 
 void solve_and_draw(std::vector<int> marker_ids, std::vector<cv::Vec3d> rvecs, std::vector<cv::Vec3d> tvecs, std::unordered_map<std::string, std::vector<cv::Point3f>> object_map, std::vector<double> distortion_coefficients, cv::Mat camera_matrix, cv::Mat output_frame) {
     for (int i=0; i < marker_ids.size(); i++) {
         std::vector<cv::Point2f> img_points; // 2D calculated points to draw
+        if (marker_ids.at(i) == 0) {
+            cv::projectPoints(object_map["robber"], rvecs.at(i), tvecs.at(i), camera_matrix, distortion_coefficients, img_points);
+            draw_robber(output_frame, img_points);
+        }
         if (marker_ids.at(i) == 10 || marker_ids.at(i) == 15) {
             cv::projectPoints(object_map["wheat_hex"], rvecs.at(i), tvecs.at(i), camera_matrix, distortion_coefficients, img_points);
             draw_wheat(output_frame, img_points);
@@ -540,6 +654,18 @@ void solve_and_draw(std::vector<int> marker_ids, std::vector<cv::Vec3d> rvecs, s
             cv::projectPoints(object_map["wheat_res"], rvecs.at(i), tvecs.at(i), camera_matrix, distortion_coefficients, img_points);
             draw_wheat(output_frame, img_points);
         }
+        if (marker_ids.at(i) == 60) {
+            cv::projectPoints(object_map["wood_res"], rvecs.at(i), tvecs.at(i), camera_matrix, distortion_coefficients, img_points);
+            draw_wood_res(output_frame, img_points);
+        }
+        if (marker_ids.at(i) == 70) {
+            cv::projectPoints(object_map["robber"], rvecs.at(i), tvecs.at(i), camera_matrix, distortion_coefficients, img_points);
+            draw_robber(output_frame, img_points);
+        }
+        if (marker_ids.at(i) == 75) {
+            cv::projectPoints(object_map["vp"], rvecs.at(i), tvecs.at(i), camera_matrix, distortion_coefficients, img_points);
+            draw_vp(output_frame, img_points);
+        }
         if (marker_ids.at(i) == 80) {
             cv::projectPoints(object_map["road_building"], rvecs.at(i), tvecs.at(i), camera_matrix, distortion_coefficients, img_points);
             draw_road_building(output_frame, img_points);
@@ -552,22 +678,57 @@ void solve_and_draw(std::vector<int> marker_ids, std::vector<cv::Vec3d> rvecs, s
             cv::projectPoints(object_map["yop"], rvecs.at(i), tvecs.at(i), camera_matrix, distortion_coefficients, img_points);
             draw_yop(output_frame, img_points);
         }
+
         if (marker_ids.at(i) == 91) {
             cv::projectPoints(object_map["road"], rvecs.at(i), tvecs.at(i), camera_matrix, distortion_coefficients, img_points);
-            draw_road(output_frame, img_points, marker_ids.at(i));
+            draw_road(output_frame, img_points, cv::Scalar(0,0,255));
+        }
+
+        if (marker_ids.at(i) == 92) {
+            cv::projectPoints(object_map["settlement"], rvecs.at(i), tvecs.at(i), camera_matrix, distortion_coefficients, img_points);
+            draw_settlement(output_frame, img_points, cv::Scalar(0,0,255));
+        }
+        if (marker_ids.at(i) == 93) {
+            cv::projectPoints(object_map["city"], rvecs.at(i), tvecs.at(i), camera_matrix, distortion_coefficients, img_points);
+            draw_city(output_frame, img_points, cv::Scalar(0,0,255));
         }
         if (marker_ids.at(i) == 94) {
             cv::projectPoints(object_map["road"], rvecs.at(i), tvecs.at(i), camera_matrix, distortion_coefficients, img_points);
-            draw_road(output_frame, img_points, marker_ids.at(i));
+            draw_road(output_frame, img_points, cv::Scalar(255,0,0));
         }
+        if (marker_ids.at(i) == 95) {
+            cv::projectPoints(object_map["settlement"], rvecs.at(i), tvecs.at(i), camera_matrix, distortion_coefficients, img_points);
+            draw_settlement(output_frame, img_points, cv::Scalar(255,0,0));
+        }
+        if (marker_ids.at(i) == 96) {
+            cv::projectPoints(object_map["city"], rvecs.at(i), tvecs.at(i), camera_matrix, distortion_coefficients, img_points);
+            draw_city(output_frame, img_points, cv::Scalar(255,0,0));
+        }
+
         if (marker_ids.at(i) == 97) {
             cv::projectPoints(object_map["road"], rvecs.at(i), tvecs.at(i), camera_matrix, distortion_coefficients, img_points);
-            draw_road(output_frame, img_points, marker_ids.at(i));
+            draw_road(output_frame, img_points, cv::Scalar(0,255,0));
+        }
+        if (marker_ids.at(i) == 98) {
+            cv::projectPoints(object_map["settlement"], rvecs.at(i), tvecs.at(i), camera_matrix, distortion_coefficients, img_points);
+            draw_settlement(output_frame, img_points, cv::Scalar(0,255,0));
+        }
+        if (marker_ids.at(i) == 99) {
+            cv::projectPoints(object_map["city"], rvecs.at(i), tvecs.at(i), camera_matrix, distortion_coefficients, img_points);
+            draw_city(output_frame, img_points, cv::Scalar(0,255,0));
         }
         if (marker_ids.at(i) == 100) {
             cv::projectPoints(object_map["road"], rvecs.at(i), tvecs.at(i), camera_matrix, distortion_coefficients, img_points);
-            draw_road(output_frame, img_points, marker_ids.at(i));
+            draw_road(output_frame, img_points, cv::Scalar(20,70,140));
         }
 
+        if (marker_ids.at(i) == 101) {
+            cv::projectPoints(object_map["settlement"], rvecs.at(i), tvecs.at(i), camera_matrix, distortion_coefficients, img_points);
+            draw_settlement(output_frame, img_points, cv::Scalar(20,70,140));
+        }
+        if (marker_ids.at(i) == 102) {
+            cv::projectPoints(object_map["city"], rvecs.at(i), tvecs.at(i), camera_matrix, distortion_coefficients, img_points);
+            draw_city(output_frame, img_points, cv::Scalar(20,70,140));
+        }
     }
 }

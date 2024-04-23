@@ -18,39 +18,9 @@ int main() {
     fs["distortion_coefficients"] >> distCoeffs;
     fs.release();
 
+    std::unordered_map<std::string, std::vector<cv::Point3f>> object_map = generate_3d_points(); // generate 3D object representations
+
     /*
-    std::vector<cv::Point3f> sheep_points = {cv::Point3f(0.0,0.0,0.0), cv::Point3f(0.04,0.0,0.0), cv::Point3f(0.04,0.04,0.0), cv::Point3f(0.0,0.04,0.0), cv::Point3f(0.12,0.0,0.0), cv::Point3f(0.16,0.0,0.0), cv::Point3f(0.16,0.04,0.0), cv::Point3f(0.12,0.04,0.0), // sheep's anatomical bottom left
-                                             cv::Point3f(0.12,0.08,0.0), cv::Point3f(0.16,0.08,0.0), cv::Point3f(0.16,0.12,0.0), cv::Point3f(0.12,0.12,0.0), cv::Point3f(0.0,0.08,0.0), cv::Point3f(0.04,0.08,0.0), cv::Point3f(0.04,0.12,0.0), cv::Point3f(0.00,0.12,0.0), // sheep's anatomical bottom right
-                                             cv::Point3f(0.0,0.0,0.06), cv::Point3f(0.04,0.0,0.06), cv::Point3f(0.04,0.04,0.06), cv::Point3f(0.0,0.04,0.06), cv::Point3f(0.12,0.0,0.06), cv::Point3f(0.16,0.0,0.06), cv::Point3f(0.16,0.04,0.06), cv::Point3f(0.12,0.04,0.06), // sheep's anatomical middle layer left
-                                             cv::Point3f(0.12,0.08,0.06), cv::Point3f(0.16,0.08,0.06), cv::Point3f(0.16,0.12,0.06), cv::Point3f(0.12,0.12,0.06), cv::Point3f(0.0,0.08,0.06), cv::Point3f(0.04,0.08,0.06), cv::Point3f(0.04,0.12,0.06), cv::Point3f(0.00,0.12,0.06), // sheep's anatomical middle layer right
-            // top square of sheep body
-                                             cv::Point3f(0.0,0.0,0.12), cv::Point3f(0.16,0.0,0.12), cv::Point3f(0.16,0.12,0.12), cv::Point3f(0.0,0.12,0.12),
-            // head bottom
-                                             cv::Point3f(.16,.04,.06), cv::Point3f(.2,.04,.06), cv::Point3f(.2,.08,.06), cv::Point3f(.16,.08,.06),
-            // head top
-                                             cv::Point3f(.16,.04,.12), cv::Point3f(.2,.04,.12), cv::Point3f(.2,.08,.12), cv::Point3f(.16,.08,.12),
-
-    };
-
-    float w = 0.04; // the sword is built using multiples of .04 for distances between points
-    std::vector<cv::Point3f> knight_points = {
-            cv::Point3f(1.5 * w, 0.5 * w, 0.0 * w), // the point at the bottom
-
-            // middle pieces
-            cv::Point3f(1.0 * w, 0.0 * w, 0.5 * w), cv::Point3f(2.0 * w, 0.0 * w, 0.5 * w), cv::Point3f(1.0 * w, 1.0 * w, 0.5 * w), cv::Point3f(2.0 * w, 1.0 * w, 0.5 * w), // first square layer, connects to bottom
-            cv::Point3f(1.0 * w, 0.0 * w, 2.0 * w), cv::Point3f(2.0 * w, 0.0 * w, 2.0 * w), cv::Point3f(1.0 * w, 1.0 * w, 2.0 * w), cv::Point3f(2.0 * w, 1.0 * w, 2.0 * w), // end of sword part of sword, middle
-            cv::Point3f(1.0 * w, 0.0 * w, 3.0 * w), cv::Point3f(2.0 * w, 0.0 * w, 3.0 * w), cv::Point3f(1.0 * w, 1.0 * w, 3.0 * w), cv::Point3f(2.0 * w, 1.0 * w, 3.0 * w), // top middle of handle guard piece
-            cv::Point3f(1.0 * w, 0.0 * w, 3.5 * w), cv::Point3f(2.0 * w, 0.0 * w, 3.5 * w), cv::Point3f(1.0 * w, 1.0 * w, 3.5 * w), cv::Point3f(2.0 * w, 1.0 * w, 3.5 * w), // handle top, middle piece
-
-            // side pieces
-            cv::Point3f(0.0 * w, 0.0 * w, 2.0 * w), cv::Point3f(3.0 * w, 0.0 * w, 2.0 * w), cv::Point3f(0.0 * w, 1.0 * w, 2.0 * w), cv::Point3f(3.0 * w, 1.0 * w, 2.0 * w), // corners of beginning of handle
-            cv::Point3f(0.0 * w, 0.0 * w, 3.0 * w), cv::Point3f(3.0 * w, 0.0 * w, 3.0 * w), cv::Point3f(0.0 * w, 1.0 * w, 3.0 * w), cv::Point3f(3.0 * w, 1.0 * w, 3.0 * w), // top sides of handle guard piece
-    };
-     */
-
-    std::unordered_map<std::string, std::vector<cv::Point3f>> object_map = generate_3d_points();
-
-
     // Stored in order Blue, Green, Red, Brown
     std::vector<int> player_scores;
     std::vector<int> player_roads;
@@ -65,6 +35,7 @@ int main() {
     for (int i = 0; i < 11; i++) {
         num_rolls.push_back(0);
     }
+     */
 
 
     cv::VideoCapture *videoCapture; // capture for webcam
@@ -87,48 +58,8 @@ int main() {
     cv::aruco::Dictionary dictionary = cv::aruco::getPredefinedDictionary(cv::aruco::DICT_6X6_1000);
     cv::aruco::ArucoDetector detector(dictionary, detector_params);
 
-
-    cv::Mat desert_hex_mat = cv::imread("res/hexes/desert_hex.png");
-    cv::Mat wheat_hex_mat = cv::imread("res/hexes/wheat_hex.png");
-    cv::Mat ore_hex_mat = cv::imread("res/hexes/ore_hex.png");
-    cv::Mat wood_hex_mat = cv::imread("res/hexes/wood_hex.png");
-    cv::Mat sheep_hex_mat = cv::imread("res/hexes/sheep_hex.png");
-    cv::Mat brick_hex_mat = cv::imread("res/hexes/brick_hex.png");
-
-    cv::Mat wheat_res_mat = cv::imread("res/resource_cards/wheat_res.png");
-    cv::Mat ore_res_mat = cv::imread("res/resource_cards/ore_res.png");
-    cv::Mat wood_res_mat = cv::imread("res/resource_cards/wood_res.png");
-    cv::Mat sheep_res_mat = cv::imread("res/resource_cards/sheep_res.png");
-    cv::Mat brick_res_mat = cv::imread("res/resource_cards/brick_res.png");
-
-    cv::Mat vp_mat = cv::imread("res/dev_cards/vp_dev.png");
-    cv::Mat knight_mat = cv::imread("res/dev_cards/knight_dev.png");
-    cv::Mat monopoly_mat = cv::imread("res/dev_cards/monopoly_dev.png");
-    cv::Mat yop_mat = cv::imread("res/dev_cards/yop_dev.png");
-    cv::Mat rb_mat = cv::imread("res/dev_cards/rb_dev.png");
-
-
-
-
-    std::vector<cv::Mat> mats;
-    mats.push_back(desert_hex_mat);
-    mats.push_back(wheat_hex_mat);
-    mats.push_back(ore_hex_mat);
-    mats.push_back(wood_hex_mat);
-    mats.push_back(sheep_hex_mat);
-    mats.push_back(brick_hex_mat);
-
-    mats.push_back(wheat_res_mat);
-    mats.push_back(ore_res_mat);
-    mats.push_back(wood_res_mat);
-    mats.push_back(sheep_res_mat);
-    mats.push_back(brick_res_mat);
-
-    mats.push_back(vp_mat);
-    mats.push_back(knight_mat);
-    mats.push_back(monopoly_mat);
-    mats.push_back(yop_mat);
-    mats.push_back(rb_mat);
+    // read appropriate images, could swap them out for others if better looking ones are available
+    std::vector<cv::Mat> mats = get_images();
 
 
 
@@ -177,6 +108,7 @@ int main() {
         }
 
         cv::Mat out = frame.clone(); // output image
+
 
 
         // store marker data
@@ -250,7 +182,7 @@ int main() {
 
         // visualize for testing
         if (!marker_ids.empty() && !marker_corners.empty()) {
-            cv::aruco::drawDetectedMarkers(out, marker_corners, marker_ids);
+            //cv::aruco::drawDetectedMarkers(out, marker_corners, marker_ids);
             //std::vector<int> brick_check;
 
             if (size_check == 31) {
@@ -421,8 +353,8 @@ int main() {
 
         if (key == 'r') {
             int roll = roll_dice();
-            num_rolls.at(roll - 2) += 1;
-            print_turn(player_scores, player_roads, roll);
+            //num_rolls.at(roll - 2) += 1;
+            //print_turn(player_scores, player_roads, roll);
         }
 
 

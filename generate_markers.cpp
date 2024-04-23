@@ -1,5 +1,5 @@
 //
-// Created by Raphael Russo on 4/19/24.
+// Generates a set of aruco markers for a game of catan and saves them to image files
 //
 #include <opencv2/objdetect/aruco_detector.hpp>
 #include <opencv2/opencv.hpp>
@@ -29,11 +29,11 @@ int main() {
      * pieces start at 110
      */
 
-    cv::aruco::Dictionary dictionary = cv::aruco::getPredefinedDictionary(cv::aruco::DICT_6X6_1000);
-    for (int i = 0; i < total_markers; i++) {
-        cv::Mat marker_mat;
-        cv::aruco::generateImageMarker(dictionary, i, 100, marker_mat, 1);
-        std::string path;
+    cv::aruco::Dictionary dictionary = cv::aruco::getPredefinedDictionary(cv::aruco::DICT_6X6_1000); // get marker dictionary
+    for (int i = 0; i < total_markers; i++) { // assign markers
+        cv::Mat marker_mat; // hold marker
+        cv::aruco::generateImageMarker(dictionary, i, 100, marker_mat, 1); // generate marker image
+        std::string path; // path to save
 
         // determine the name of the file based on the marker id
         if (i == 0) {
@@ -129,7 +129,7 @@ int main() {
         else if (i ==102) {
             path = "pieces/brown/city_";
         }
-        std::string full_path = "res/markers/" + path + std::to_string(i) + ".png";
+        std::string full_path = "res/markers/" + path + std::to_string(i) + ".png"; // combine path and save
         cv::imwrite(full_path, marker_mat);
     }
     return 1;

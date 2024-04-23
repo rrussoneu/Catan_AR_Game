@@ -1,5 +1,5 @@
 //
-// Created by Raphael Russo on 4/17/24.
+// Draws various catan objects
 //
 
 #ifndef CATAN_AR_GAME_DRAW_SHAPES_H
@@ -61,6 +61,6 @@ int draw_wood(cv::Mat &frame, std::vector<cv::Point2f> img_points);
  * @param img_points points to connect
  * @return on success
  */
-int draw_knight(cv::Mat &frame, std::vector<cv::Point2f> img_points);
+void draw_robber(cv::Mat &frame, std::vector<cv::Point2f> img_points);
 
 #endif //CATAN_AR_GAME_DRAW_SHAPES_H
