@@ -126,7 +126,7 @@ std::unordered_map<std::string, std::unordered_map<int, std::vector < cv::Point2
         if (marker_ids.at(i) >= 46 && marker_ids.at(i) < 51) {
             marker_maps["ore_map_res"][marker_ids.at(i)] = marker_corners.at(i);
         }
-        if (marker_ids.at(i) >= 51 && marker_ids.at(i) < 16) {
+        if (marker_ids.at(i) >= 51 && marker_ids.at(i) < 56) {
             marker_maps["sheep_map_res"][marker_ids.at(i)] = marker_corners.at(i);
         }
         if (marker_ids.at(i) >= 56 && marker_ids.at(i) < 61) {

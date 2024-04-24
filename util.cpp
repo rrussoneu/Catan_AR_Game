@@ -130,23 +130,36 @@ void handle_homography(std::unordered_map<std::string, std::unordered_map<int, s
             if (i % 5 != 5 && i != 1) { // skip if not 1, 6, etc
                 continue;
             } else {
+                if (i == 1) {
+                    compute_homography(1, marker_maps["desert_map"], homography_points.at(0), mats.at(0), frame, out);
+                }
+
                 switch (i) {
                     // hex homography
                     // desert, wheat ore, wood, sheep, brick
                     case 1:
                         compute_homography(1, marker_maps["desert_map"], homography_points.at(0), mats.at(0), frame, out);
+
                     case 6:
                         compute_homography(6, marker_maps["wheat_map_1"], homography_points.at(1), mats.at(1), frame, out);
+
                     case 11:
                         compute_homography(11, marker_maps["wheat_map_2"], homography_points.at(1), mats.at(1), frame, out);
+
                     case 16:
                         compute_homography(16, marker_maps["ore_map"], homography_points.at(2), mats.at(2), frame, out);
+
                     case 21:
                         compute_homography(21, marker_maps["sheep_map"], homography_points.at(4), mats.at(4), frame, out);
+
                     case 26:
                         compute_homography(26, marker_maps["wood_map"], homography_points.at(3), mats.at(3), frame, out);
+
+
                     case 31:
                         compute_homography(31, marker_maps["brick_map"], homography_points.at(5), mats.at(5), frame, out);
+
+
                 }
             }
         }
@@ -159,16 +172,28 @@ void handle_homography(std::unordered_map<std::string, std::unordered_map<int, s
 
                     case 36:
                         compute_homography(36, marker_maps["wheat_map_1_res"], homography_points.at(6), mats.at(6), frame, out);
+
+
                     case 41:
                         compute_homography(41, marker_maps["wheat_map_2_res"], homography_points.at(6), mats.at(6), frame, out);
+
+
                     case 46:
                         compute_homography(46, marker_maps["ore_map_res"], homography_points.at(7), mats.at(7), frame, out);
+
+
                     case 51:
-                        compute_homography(51, marker_maps["sheep_mat_res"], homography_points.at(9), mats.at(9), frame, out);
+                        compute_homography(51, marker_maps["sheep_map_res"], homography_points.at(9), mats.at(9), frame, out);
+
+
                     case 56:
                         compute_homography(56, marker_maps["wood_map_res"], homography_points.at(8), mats.at(8), frame, out);
+
+
                     case 61:
                         compute_homography(61, marker_maps["brick_map_res"], homography_points.at(10), mats.at(10), frame, out);
+
+
                 }
             }
         }
@@ -181,14 +206,21 @@ void handle_homography(std::unordered_map<std::string, std::unordered_map<int, s
 
                     case 66:
                         compute_homography(66, marker_maps["knight_map"], homography_points.at(12), mats.at(12), frame, out);
+
+
                     case 71:
                         compute_homography(71, marker_maps["vp_map"], homography_points.at(11), mats.at(11), frame, out);
+
                     case 81:
                         compute_homography(81, marker_maps["monopoly_map"], homography_points.at(13), mats.at(13), frame, out);
+
                     case 76:
                         compute_homography(76, marker_maps["road_building_map"], homography_points.at(15), mats.at(15), frame, out);
+
                     case 86:
                         compute_homography(86, marker_maps["yop_map"], homography_points.at(14), mats.at(14), frame, out);
+
+
 
                 }
             }

@@ -27,7 +27,7 @@ std::unordered_map<std::string, std::vector<cv::Point3f>> generate_3d_points() {
     object_map["wheat_res"] = wheat_points;
 
 
-    std::vector<cv::Point3f> sheep_points = {cv::Point3f(0.0,0.0,0.0), cv::Point3f(0.04/3,0.0,0.0), cv::Point3f(0.04/3,0.04/3,0.0), cv::Point3f(0.0,0.04/3,0.0), cv::Point3f(0.12/3,0.0,0.0), cv::Point3f(0.16/3,0.0,0.0), cv::Point3f(0.16/3,0.04/3,0.0), cv::Point3f(0.12/3,0.04/3,0.0), // sheep's anatomical bottom left
+    std::vector<cv::Point3f> sheep_points_old = {cv::Point3f(0.0,0.0,0.0), cv::Point3f(0.04/3,0.0,0.0), cv::Point3f(0.04/3,0.04/3,0.0), cv::Point3f(0.0,0.04/3,0.0), cv::Point3f(0.12/3,0.0,0.0), cv::Point3f(0.16/3,0.0,0.0), cv::Point3f(0.16/3,0.04/3,0.0), cv::Point3f(0.12/3,0.04/3,0.0), // sheep's anatomical bottom left
                                              cv::Point3f(0.12/3,0.08/3,0.0), cv::Point3f(0.16/3,0.08/3,0.0), cv::Point3f(0.16/3,0.12/3,0.0), cv::Point3f(0.12/3,0.12/3,0.0), cv::Point3f(0.0,0.08/3,0.0), cv::Point3f(0.04/3,0.08/3,0.0), cv::Point3f(0.04/3,0.12/3,0.0), cv::Point3f(0.00,0.12/3,0.0), // sheep's anatomical bottom right
                                              cv::Point3f(0.0,0.0,0.06/3), cv::Point3f(0.04/3,0.0,0.06/3), cv::Point3f(0.04/3,0.04/3,0.06/3), cv::Point3f(0.0,0.04/3,0.06/3), cv::Point3f(0.12/3,0.0,0.06/3), cv::Point3f(0.16/3,0.0,0.06/3), cv::Point3f(0.16/3,0.04/3,0.06/3), cv::Point3f(0.12/3,0.04/3,0.06/3), // sheep's anatomical middle layer left
                                              cv::Point3f(0.12/3,0.08/3,0.06/3), cv::Point3f(0.16/3,0.08/3,0.06/3), cv::Point3f(0.16/3,0.12/3,0.06/3), cv::Point3f(0.12/3,0.12/3,0.06/3), cv::Point3f(0.0,0.08/3,0.06/3), cv::Point3f(0.04/3,0.08/3,0.06/3), cv::Point3f(0.04/3,0.12/3,0.06/3), cv::Point3f(0.00,0.12/3,0.06/3), // sheep's anatomical middle layer right
@@ -37,6 +37,19 @@ std::unordered_map<std::string, std::vector<cv::Point3f>> generate_3d_points() {
                                              cv::Point3f(.16/3,.04/3,.06/3), cv::Point3f(.2/3,.04/3,.06/3), cv::Point3f(.2/3,.08/3,.06/3), cv::Point3f(.16/3,.08/3,.06/3),
             // head top
                                              cv::Point3f(.16/3,.04/3,.12/3), cv::Point3f(.2/3,.04/3,.12/3), cv::Point3f(.2/3,.08/3,.12/3), cv::Point3f(.16/3,.08/3,.12/3),
+
+    };
+
+    std::vector<cv::Point3f> sheep_points = {cv::Point3f(-0.03,0.0,0.0), cv::Point3f(-.015,0.0,0.0), cv::Point3f(-.015,.015,0.0), cv::Point3f(-0.03,.015,0.0), cv::Point3f(0.01,0.0,0.0), cv::Point3f(.025,0.0,0.0), cv::Point3f(.025,0.015,0.0), cv::Point3f(.01,.015,0.0), // sheep's anatomical bottom left
+                                             cv::Point3f(.01,0.08/3,0.0), cv::Point3f(.025,0.08/3,0.0), cv::Point3f(0.025,0.04,0.0), cv::Point3f(.01,0.12/3,0.0), cv::Point3f(-0.03,0.08/3,0.0), cv::Point3f(-0.015,0.08/3,0.0), cv::Point3f(-0.015,0.12/3,0.0), cv::Point3f(-0.03,0.12/3,0.0), // sheep's anatomical bottom right
+                                             cv::Point3f(-0.03,0.0,0.06/3), cv::Point3f(-0.015,0.0,0.06/3), cv::Point3f(-0.015,0.04/3,0.06/3), cv::Point3f(-0.03,0.04/3,0.06/3), cv::Point3f(.01,0.0,0.06/3), cv::Point3f(.025,0.0,0.06/3), cv::Point3f(.025,0.04/3,0.06/3), cv::Point3f(.01,0.04/3,0.06/3), // sheep's anatomical middle layer left
+                                             cv::Point3f(.01,0.08/3,0.06/3), cv::Point3f(.025,0.08/3,0.06/3), cv::Point3f(.025,0.12/3,0.06/3), cv::Point3f(0.01,0.12/3,0.06/3), cv::Point3f(-0.03,0.08/3,0.06/3), cv::Point3f(-.015,0.08/3,0.06/3), cv::Point3f(-.015,0.12/3,0.06/3), cv::Point3f(-0.03,0.12/3,0.06/3), // sheep's anatomical middle layer right
+            // top square of sheep body
+                                             cv::Point3f(-0.03,0.0,0.12/3), cv::Point3f(0.025,0.0,0.12/3), cv::Point3f(0.025,0.12/3,0.12/3), cv::Point3f(-0.03,0.12/3,0.12/3),
+            // head bottom
+                                             cv::Point3f(0.025,.04/3,.06/3), cv::Point3f(0.035,.04/3,.06/3), cv::Point3f(0.035,.08/3,.06/3), cv::Point3f(0.025,.08/3,.06/3),
+            // head top
+                                             cv::Point3f(0.025,.04/3,.12/3), cv::Point3f(0.035,.04/3,.12/3), cv::Point3f(0.035,.08/3,.12/3), cv::Point3f(0.025,.08/3,.12/3),
 
     };
     object_map["sheep_hex"] = sheep_points;
@@ -68,8 +81,11 @@ std::unordered_map<std::string, std::vector<cv::Point3f>> generate_3d_points() {
 
 
 
-    std::vector<cv::Point3f> brick_points = {cv::Point3f(0.0, 0.0, 0.0), cv::Point3f(0.10, 0.0, 0.0), cv::Point3f(0.10, 0.05, 0.0), cv::Point3f(0.0, 0.05, 0.0),
-                                             cv::Point3f(0.0, 0.0, -0.05), cv::Point3f(0.10, 0.0, -0.05), cv::Point3f(0.10, 0.05, -0.05), cv::Point3f(0.0, 0.05, -0.05),};
+    std::vector<cv::Point3f> brick_res_points = {cv::Point3f(-0.03, 0.0, 0.0), cv::Point3f(0.03, 0.0, 0.0), cv::Point3f(0.03, -0.03, 0.0), cv::Point3f(-0.03, -0.03, 0.0),
+                                             cv::Point3f(-0.03, 0.0, 0.03), cv::Point3f(0.03, 0.0, 0.03), cv::Point3f(0.03, -0.03, 0.03), cv::Point3f(-0.03, -0.03, 0.03),};
+
+
+    object_map["brick_res"] = brick_res_points;
 
     std::vector<cv::Point3f> ore_points = {cv::Point3f(0.00,0.00,0.0), cv::Point3f(0.1, 0.00,0.00), cv::Point3f(0.05, 0.1, 0.00), cv::Point3f(0.05, 0.05, -.1)};
 
@@ -195,28 +211,6 @@ std::unordered_map<std::string, std::vector<cv::Point3f>> generate_3d_points() {
 }
 
 
-/**
- * Draws a brick from image points - just a rectangular box
- * @param frame frame to draw on
- * @param img_pts points to connect
- * @return on success
- */
-int draw_brick(cv::Mat &frame, std::vector<cv::Point2f> img_pts) {
-    cv::line(frame, img_pts.at(0), img_pts.at(1), cv::Scalar(60,74,178), 5);
-    cv::line(frame, img_pts.at(1), img_pts.at(2), cv::Scalar(60,74,178), 5);
-    cv::line(frame, img_pts.at(2), img_pts.at(3), cv::Scalar(60,74,178), 5);
-    cv::line(frame, img_pts.at(3), img_pts.at(0), cv::Scalar(60,74,178), 5);
-    cv::line(frame, img_pts.at(0), img_pts.at(4), cv::Scalar(60,74,178), 5);
-    cv::line(frame, img_pts.at(1), img_pts.at(5), cv::Scalar(60,74,178), 5);
-    cv::line(frame, img_pts.at(2), img_pts.at(6), cv::Scalar(60,74,178), 5);
-    cv::line(frame, img_pts.at(3), img_pts.at(7), cv::Scalar(60,74,178), 5);
-    cv::line(frame, img_pts.at(4), img_pts.at(5), cv::Scalar(60,74,178), 5);
-    cv::line(frame, img_pts.at(5), img_pts.at(6), cv::Scalar(60,74,178), 5);
-    cv::line(frame, img_pts.at(6), img_pts.at(7), cv::Scalar(60,74,178), 5);
-    cv::line(frame, img_pts.at(7), img_pts.at(4), cv::Scalar(60,74,178), 5);
-
-    return 0;
-}
 
 /**
  * Draws a sheep from image points. There are some photos included in the report of the drawings/ planning for this
@@ -621,6 +615,20 @@ void draw_wood_res(cv::Mat &frame, std::vector<cv::Point2f> img_points) {
     }
 }
 
+void draw_brick_res(cv::Mat &frame, std::vector<cv::Point2f> img_points) {
+    for (int i = 0; i < 4; i++) {
+        if (i != 3) {
+            cv::line(frame, img_points.at(i), img_points.at(i + 1), cv::Scalar(60,74,178), 5);
+            cv::line(frame, img_points.at(i + 4), img_points.at(i + 5), cv::Scalar(60,74,178), 5);
+
+        } else {
+            cv::line(frame, img_points.at(i), img_points.at(i - 3), cv::Scalar(60,74,178), 5);
+            cv::line(frame, img_points.at(i + 4), img_points.at(i + 1), cv::Scalar(60,74,178), 5);
+        }
+
+        cv::line(frame, img_points.at(i), img_points.at(i + 4), cv::Scalar(60,74,178), 5);
+    }
+}
 
 void solve_and_draw(std::vector<int> marker_ids, std::vector<cv::Vec3d> rvecs, std::vector<cv::Vec3d> tvecs, std::unordered_map<std::string, std::vector<cv::Point3f>> object_map, std::vector<double> distortion_coefficients, cv::Mat camera_matrix, cv::Mat output_frame) {
     for (int i=0; i < marker_ids.size(); i++) {
@@ -654,9 +662,17 @@ void solve_and_draw(std::vector<int> marker_ids, std::vector<cv::Vec3d> rvecs, s
             cv::projectPoints(object_map["wheat_res"], rvecs.at(i), tvecs.at(i), camera_matrix, distortion_coefficients, img_points);
             draw_wheat(output_frame, img_points);
         }
+        if (marker_ids.at(i) == 55) {
+            cv::projectPoints(object_map["sheep_res"], rvecs.at(i), tvecs.at(i), camera_matrix, distortion_coefficients, img_points);
+            draw_sheep(output_frame, img_points);
+        }
         if (marker_ids.at(i) == 60) {
             cv::projectPoints(object_map["wood_res"], rvecs.at(i), tvecs.at(i), camera_matrix, distortion_coefficients, img_points);
             draw_wood_res(output_frame, img_points);
+        }
+        if (marker_ids.at(i) == 65) {
+            cv::projectPoints(object_map["brick_res"], rvecs.at(i), tvecs.at(i), camera_matrix, distortion_coefficients, img_points);
+            draw_brick_res(output_frame, img_points);
         }
         if (marker_ids.at(i) == 70) {
             cv::projectPoints(object_map["robber"], rvecs.at(i), tvecs.at(i), camera_matrix, distortion_coefficients, img_points);
