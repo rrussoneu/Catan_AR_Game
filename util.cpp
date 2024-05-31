@@ -1,10 +1,14 @@
 //
-// Created by Raphael Russo on 4/17/24.
+// Utility functions for general game purposes and homography
 //
 
 #include <iostream>
 #include "util.h"
 
+/**
+ * Reads image files for game
+ * @return vector of mats with the image data
+ */
 std::vector<cv::Mat> get_images() {
     cv::Mat desert_hex_mat = cv::imread("res/hexes/desert_hex.png");
     cv::Mat wheat_hex_mat = cv::imread("res/hexes/wheat_hex.png");
@@ -47,15 +51,10 @@ std::vector<cv::Mat> get_images() {
     return mats;
 }
 
-int print_turn(std::vector<int> scores, std::vector<int> roads, int dice_roll) {
-    std::cout << "Blue Points: " << scores.at(0) << "\n Blue roads: \n" << roads.at(0)
-            << "Green Points: " << scores.at(1) << "\n Green roads: \n" << roads.at(1)
-            << "Red Points: " << scores.at(2) << "\n Red roads: \n" << roads.at(2)
-            << "Brown Points: " << scores.at(3) << "\n Brown roads: " << roads.at(3) << std::endl;
-    std::cout << "Dice roll: " << dice_roll << std::endl;
-}
-
-
+/**
+ * Gets a dice roll result
+ * @return the roll
+ */
 int roll_dice() {
     // Two rolls out of 6 to simulate dice
     int roll_one = rand() % 6 + 1;
@@ -63,6 +62,11 @@ int roll_dice() {
     return roll_one + roll_two;
 }
 
+/**
+ * Gets points for homography calculation for a vector of cv mats
+ * @param mats the mats
+ * @return the newly created vector
+ */
 std::vector<std::vector<cv::Point2f>> get_homography_points(std::vector<cv::Mat> mats) {
     std::vector<std::vector<cv::Point2f>> point_vector;
     for (int i = 0; i < mats.size(); i++) {
@@ -77,18 +81,20 @@ std::vector<std::vector<cv::Point2f>> get_homography_points(std::vector<cv::Mat>
     return point_vector;
 }
 
-cv::Mat handle_alpha(cv::Mat mat) {
-    cv::Mat output_a;
-    cv::cvtColor(mat, output_a, cv::COLOR_BGR2BGRA);
 
-    return output_a;
-};
-
+/**
+ * Uses markers and images to compute homography and overlay a game's component onto the markers in the frame
+ * @param aruco_id id of aruco marker serving as top left
+ * @param marker_map markers' points
+ * @param img_pts points in image to use for planar homography
+ * @param hex_mat mat of image to overlay
+ * @param frame input frame
+ * @param out output frame
+ */
 void compute_homography(int aruco_id, std::unordered_map<int, std::vector<cv::Point2f>> marker_map, std::vector<cv::Point2f> img_pts, cv::Mat hex_mat, cv::Mat frame, cv::Mat out) {
     try {
         if (marker_map.count(aruco_id) && marker_map.count(aruco_id + 1) && marker_map.count(aruco_id + 2) && marker_map.count(aruco_id) + 3) { // check all needed markers are present
             std::vector<cv::Point2f> frame_corners; // corners of points to make a box for image
-            std::cout << "in compute" << std::endl;
 
             // make sure all the corners are available
             if (marker_map.count(aruco_id) && marker_map.count(aruco_id + 1) && marker_map.count(aruco_id + 3) && marker_map.count(aruco_id +2)) {
@@ -97,8 +103,6 @@ void compute_homography(int aruco_id, std::unordered_map<int, std::vector<cv::Po
                 frame_corners.push_back(marker_map[aruco_id + 3][2]);
                 frame_corners.push_back(marker_map[aruco_id + 2][3]);
             }
-
-            std::cout << "in compute2" << std::endl;
 
 
             // get warped version of card image to match the board
@@ -123,7 +127,14 @@ void compute_homography(int aruco_id, std::unordered_map<int, std::vector<cv::Po
 
 }
 
-
+/**
+ * Handles different cases where homography is needed to display an image
+ * @param marker_maps map of aruco markers
+ * @param homography_points mat points for calculation
+ * @param mats mats to use
+ * @param frame camera frame as input
+ * @param out output frame to draw on
+ */
 void handle_homography(std::unordered_map<std::string, std::unordered_map<int, std::vector < cv::Point2f>>> marker_maps, std::vector<std::vector<cv::Point2f>> homography_points, std::vector<cv::Mat> mats, cv::Mat frame, cv::Mat out) {
     try {
         for (int i = 1; i < 32; i++) { // can skip through a bunch of markers and iterate by 5

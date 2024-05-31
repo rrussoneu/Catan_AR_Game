@@ -1,3 +1,5 @@
+// A program to display the components of a game of Catan in augmented reality
+
 #include <iostream>
 
 #include "util.h"
@@ -20,22 +22,10 @@ int main() {
 
     std::unordered_map<std::string, std::vector<cv::Point3f>> object_map = generate_3d_points(); // generate 3D object representations
 
-    /*
-    // Stored in order Blue, Green, Red, Brown
-    std::vector<int> player_scores;
-    std::vector<int> player_roads;
-
     std::vector<int> num_rolls; // keep track of number of time each roll occurs for stats
-
-    for (int i = 0; i < 4; i++) {
-        player_scores.push_back(0);
-        player_roads.push_back(0);
-    }
-
     for (int i = 0; i < 11; i++) {
         num_rolls.push_back(0);
     }
-     */
 
 
     cv::VideoCapture *videoCapture; // capture for webcam
@@ -60,47 +50,13 @@ int main() {
 
     // read appropriate images, could swap them out for others if better looking ones are available
     std::vector<cv::Mat> mats = get_images();
-
-
-
-    std::vector<std::vector<cv::Point2f>> homography_points = get_homography_points(mats);
-    std::vector<cv::Point2f> brick_hex_pts = homography_points.at(5);
-
-    /*
-    Row: 5Col: 175
-    Row: 100 Col: 5
-    Row: 100 Col: 350
-    Row: 280 Col: 5
-    Row: 280Col: 350
-    Row: 365 Col: 175
-     */
-    //brick_hex_pts.push_back(cv::Point2f(5.0, 175.0));
-    //brick_hex_pts.push_back(cv::Point2f(100.0, 5.0));
-    //brick_hex_pts.push_back(cv::Point2f(100.0, 350.0));
-    //brick_hex_pts.push_back(cv::Point2f(280.0, 5.0));
-    //brick_hex_pts.push_back(cv::Point2f(280.0, 350.0));
-    //brick_hex_pts.push_back(cv::Point2f(365.0, 175.0));
-
-    //brick_hex_pts.push_back(cv::Point2f(175.0, 5.0));
-    //brick_hex_pts.push_back(cv::Point2f(5.0, 100.0));
-    //brick_hex_pts.push_back(cv::Point2f(350.0, 100.0));
-    //brick_hex_pts.push_back(cv::Point2f(5.0, 280.0));
-    //brick_hex_pts.push_back(cv::Point2f(350.0, 280.0));
-    //brick_hex_pts.push_back(cv::Point2f(175.0, 365.0));
-
-    //brick_hex_pts.push_back(cv::Point2f(0.00,0));
-    //brick_hex_pts.push_back(cv::Point2f(brick_hex_mat.cols - 1.00,0.00));
-    //brick_hex_pts.push_back(cv::Point2f(brick_hex_mat.cols - 1.00,brick_hex_mat.rows - 1.00));
-    //brick_hex_pts.push_back(cv::Point2f(0.00,brick_hex_mat.rows - 1.00));
-
+    std::vector<std::vector<cv::Point2f>> homography_points = get_homography_points(mats); // get points for homography on images
 
 
 
     for (;;) {
 
         *videoCapture >> frame;
-
-
 
         if (frame.empty()) {
             std::cout << "Frame is empty" << std::endl;
@@ -110,18 +66,15 @@ int main() {
         cv::Mat out = frame.clone(); // output image
 
 
-
         // store marker data
         std::vector<int> marker_ids;
         std::vector<std::vector<cv::Point2f>> marker_corners;
         std::vector<std::vector<cv::Point2f>> rejected_candidates;
         cv::Mat curr_corners;
         cv::Mat curr_ids;
-        //std::vector<cv::Point3f> curr_obj_points;
-        //std::vector<cv::Point2f> curr_img_points;
 
+        // handle marker mapping
         std::unordered_map<std::string, std::unordered_map<int, std::vector < cv::Point2f>>> marker_maps = make_maps();
-
         int size_check = marker_maps.size(); // check that the marker maps were generated with correct size
 
         // find markers
@@ -162,14 +115,25 @@ int main() {
         // key presses below
         char key = cv::waitKey(10);
 
+        // quit
         if (key == 'q') {
             break;
         }
 
+        // roll dice
         if (key == 'r') {
             int roll = roll_dice();
-            //num_rolls.at(roll - 2) += 1;
-            //print_turn(player_scores, player_roads, roll);
+            std::cout << "Dice roll: " << roll << std::endl;
+            num_rolls.at(roll - 2) += 1;
+        }
+
+        // get stats
+        if (key == 's') {
+            std::string roll_info;
+            for (int i = 0; i < num_rolls.size(); i++) {
+                roll_info += std::to_string(i + 2) + ": " + std::to_string(num_rolls.at(i)) + "\n";
+            }
+            std::cout << roll_info << std::endl;
         }
 
         cv::imshow("Camera", out); // show frame output

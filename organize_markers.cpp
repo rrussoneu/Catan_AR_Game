@@ -1,9 +1,13 @@
 //
-// Created by Raphael Russo on 4/21/24.
+// Utility functions for aruco marker organization
 //
 
 #include "organize_markers.h"
 
+/**
+ * Makes a series of maps for aruco marker ids
+ * @return a hashmap of hashmaps for the ids
+ */
 std::unordered_map<std::string, std::unordered_map<int, std::vector < cv::Point2f>>> make_maps() {
     std::unordered_map<std::string, std::unordered_map<int, std::vector < cv::Point2f>>> marker_maps;
 
@@ -88,6 +92,11 @@ std::unordered_map<std::string, std::unordered_map<int, std::vector < cv::Point2
     return marker_maps;
 }
 
+/**
+ * Puts aruco marker ids into the appropriate maps
+ * @param marker_ids aruco marker ids
+ * @param maps maps for the markers
+ */
 std::unordered_map<std::string, std::unordered_map<int, std::vector < cv::Point2f>>> map_markers(std::vector<int> marker_ids, std::vector<std::vector<cv::Point2f>> marker_corners, std::unordered_map<std::string, std::unordered_map<int, std::vector < cv::Point2f>>> marker_maps) {
     for (int i = 0; i < marker_ids.size(); i++) { // group each marker into its proper map of marker and coordinate based on game pieces
         if (marker_ids.at(i) == 0) {

@@ -1,5 +1,5 @@
 //
-// Created by Raphael Russo on 4/21/24.
+// Utility functions for aruco marker organization
 //
 
 #ifndef CATAN_AR_GAME_ORGANIZE_MARKERS_H
