@@ -1,3 +1,7 @@
+# PLEASE SEE NEW VERSION AT: https://github.com/rrussoneu/AR_Catan
+
+
+
 # AR Catan Project
 
 ## Abstract
